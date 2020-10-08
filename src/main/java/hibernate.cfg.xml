@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+"-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+    <session-factory>
+        <property name="hibernate.bytecode.use_reflection_optimizer">false</property>
+        <property name="hibernate.connection.driver_class">org.postgresql.Driver</property>
+        <property name="hibernate.connection.password">secret79</property>
+        <property name="hibernate.connection.url">jdbc:postgresql://10.10.5.3:5432/bjbs_umroh</property>
+        <property name="hibernate.connection.username">postgres</property>
+        <property name="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</property>
+        <property name="hibernate.search.autoregister_listeners">false</property>
+        <property name="hibernate.validator.apply_to_ddl">false</property>
+        <mapping class="com.bjbs.auth.models.Menu" />
+        <mapping class="com.bjbs.auth.models.Role" />
+        <mapping class="com.bjbs.auth.models.RoleMenu" />
+        <mapping class="com.bjbs.auth.models.UserRole" />
+        <mapping class="com.bjbs.auth.models.Users" />
+    </session-factory>
+</hibernate-configuration>
