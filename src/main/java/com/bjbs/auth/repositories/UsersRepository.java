@@ -14,10 +14,10 @@ import com.bjbs.auth.models.Users;
 @Repository
 public interface UsersRepository extends JpaRepository<Users, Long> {
 	
-@Query(value = "SELECT * FROM Users u WHERE u.user_name = ?1",nativeQuery = true)
+@Query(value = "SELECT * FROM users u WHERE u.username = ?1",nativeQuery = true)
 public Users findUserByUsername(String username);
 
 @Modifying
-@Query(value = "UPDATE Users set password = ?1 where user_id = ?2",nativeQuery = true)
+@Query(value = "UPDATE users set password = ?1 where id = ?2",nativeQuery = true)
 public int updatePassword(String password, long UserId);
 }

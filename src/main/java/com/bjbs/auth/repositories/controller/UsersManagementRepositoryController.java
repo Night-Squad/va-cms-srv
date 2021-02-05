@@ -36,18 +36,8 @@ import com.bjbs.auth.dtos.CreateUserDTO;
 import com.bjbs.auth.dtos.Response;
 import com.bjbs.auth.dtos.UpdateUserDTO;
 import com.bjbs.auth.dtos.UploadFileResponse;
-import com.bjbs.auth.models.Branch;
-import com.bjbs.auth.models.Role;
-import com.bjbs.auth.models.UserBranch;
-import com.bjbs.auth.models.UserRole;
 import com.bjbs.auth.models.Users;
-import com.bjbs.auth.models.ViewUserManagement;
-import com.bjbs.auth.repositories.BranchRepository;
-import com.bjbs.auth.repositories.RoleRepository;
-import com.bjbs.auth.repositories.UserBranchRepository;
-import com.bjbs.auth.repositories.UserRoleRepository;
 import com.bjbs.auth.repositories.UsersRepository;
-import com.bjbs.auth.repositories.ViewUserManagementRepository;
 import com.bjbs.auth.utility.HashUtil.SHA_256;
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -66,20 +56,6 @@ public class UsersManagementRepositoryController {
 	@Autowired
 	UsersRepository usersRepository;
 
-	@Autowired
-	UserBranchRepository userBranchRepository;
-	
-	@Autowired
-	UserRoleRepository userRoleRepository;
-
-	@Autowired
-	BranchRepository branchRepository;
-	
-	@Autowired
-	RoleRepository roleRepository;
-	
-	@Autowired
-	ViewUserManagementRepository viewUserManagementRepository;
 
 	@GetMapping("/get_user_management")
 	public Map<String, Object> readAll(@RequestParam long userId, HttpServletRequest request) {
@@ -93,9 +69,7 @@ public class UsersManagementRepositoryController {
                 remoteAddr = request.getRemoteAddr();
             }
         }
-        
-        ViewUserManagement userManagement = viewUserManagementRepository.findUserManagementByUserId(userId);
-        result.put("userData", userManagement);
+
         result.put("userIpAddress", remoteAddr);
         
 		return result;
@@ -131,8 +105,7 @@ public class UsersManagementRepositoryController {
 			null, //userMaritalStatus
 			null, //isActive
 			null, //isFreshUser
-			null, //userRealName
-			null //userRoles
+			null //userRealName
 		))).size()!=0){
 			return ResponseEntity.ok().body(new Response("99", "User dengan username yang sama sudah ada di dalam database!"));
 		}
@@ -151,21 +124,21 @@ public class UsersManagementRepositoryController {
 		user.setIsActive((short)1);
 		Users response = usersRepository.save(user);
 
-		UserBranch userBranch = new UserBranch();
-		userBranch.setUser(response);
-		userBranch.setCreatedBy(userCode);
-		userBranch.setCreatedDate(new Date(epoch));
-		userBranch.setUpdatedBy(userCode);
-		userBranch.setUpdatedDate(new Date(epoch));
-		Optional<Branch> branch = branchRepository.findById(userDto.getBranchId());
-		userBranch.setBranch(branch.get());
-		userBranchRepository.save(userBranch);
-		
-		UserRole userRole = new UserRole();
-		userRole.setUsers(response);
-		Optional<Role> role = roleRepository.findById(userDto.getRoleId());
-		userRole.setRole(role.get());
-		userRoleRepository.save(userRole);
+//		UserBranch userBranch = new UserBranch();
+//		userBranch.setUser(response);
+//		userBranch.setCreatedBy(userCode);
+//		userBranch.setCreatedDate(new Date(epoch));
+//		userBranch.setUpdatedBy(userCode);
+//		userBranch.setUpdatedDate(new Date(epoch));
+//		Optional<Branch> branch = branchRepository.findById(userDto.getBranchId());
+//		userBranch.setBranch(branch.get());
+//		userBranchRepository.save(userBranch);
+//
+//		UserRole userRole = new UserRole();
+//		userRole.setUsers(response);
+//		Optional<Role> role = roleRepository.findById(userDto.getRoleId());
+//		userRole.setRole(role.get());
+//		userRoleRepository.save(userRole);
 		
 		return ResponseEntity.ok().body(new Response("00", "User berhasil ditambahkan"));
 	}
@@ -226,20 +199,19 @@ public class UsersManagementRepositoryController {
 					null, //userMaritalStatus
 					null, //isActive
 					null, //isFreshUser
-					null, //curRow.getCell(1).getStringCellValue(), //userRealName
-					null //userRoles
+					null //curRow.getCell(1).getStringCellValue(), //userRealName
 				))).size()==0){
 					
-					Branch branch = branchRepository.findBranchByBranchCode((row.getCell(5).getStringCellValue()));
-					if (branch == null) {
-						st = 1;
-						message.append("Kode Cabang tidak ditemukan atau salah <br/>");
-					}
-					Optional<Role> role = roleRepository.findById((long)row.getCell(6).getNumericCellValue());
-					if (role.isPresent() == false) {
-						st = 1;
-						message.append("Kode Role tidak ditemukan atau salah <br/>");
-					}
+//					Branch branch = branchRepository.findBranchByBranchCode((row.getCell(5).getStringCellValue()));
+//					if (branch == null) {
+//						st = 1;
+//						message.append("Kode Cabang tidak ditemukan atau salah <br/>");
+//					}
+//					Optional<Role> role = roleRepository.findById((long)row.getCell(6).getNumericCellValue());
+//					if (role.isPresent() == false) {
+//						st = 1;
+//						message.append("Kode Role tidak ditemukan atau salah <br/>");
+//					}
 					
 					if (st == 0) {
 						
@@ -257,19 +229,19 @@ public class UsersManagementRepositoryController {
 						user.setIsActive((short)1);
 						Users response = usersRepository.save(user);
 
-						UserBranch userBranch = new UserBranch();
-						userBranch.setUser(response);
-						userBranch.setCreatedBy(userCode);
-						userBranch.setCreatedDate(new Date(epoch));
-						userBranch.setUpdatedBy(userCode);
-						userBranch.setUpdatedDate(new Date(epoch));
-						userBranch.setBranch(branch);
-						userBranchRepository.save(userBranch);
-						
-						UserRole userRole = new UserRole();
-						userRole.setUsers(response);
-						userRole.setRole(role.get());
-						userRoleRepository.save(userRole);
+//						UserBranch userBranch = new UserBranch();
+//						userBranch.setUser(response);
+//						userBranch.setCreatedBy(userCode);
+//						userBranch.setCreatedDate(new Date(epoch));
+//						userBranch.setUpdatedBy(userCode);
+//						userBranch.setUpdatedDate(new Date(epoch));
+//						userBranch.setBranch(branch);
+//						userBranchRepository.save(userBranch);
+//
+//						UserRole userRole = new UserRole();
+//						userRole.setUsers(response);
+//						userRole.setRole(role.get());
+//						userRoleRepository.save(userRole);
 						
 						successItems++;
 						
@@ -319,17 +291,17 @@ public class UsersManagementRepositoryController {
 			oldUser.setUpdatedDate(new Date(epoch));
 			usersRepository.save(oldUser);
 			
-			Optional<UserBranch> userBranch = userBranchRepository.findById(userDto.getUserBranchId());
-			userBranch.get().setUpdatedBy(userCode);
-			userBranch.get().setUpdatedDate(new Date(epoch));
-			Optional<Branch> branch = branchRepository.findById(userDto.getBranchId());
-			userBranch.get().setBranch(branch.get());
-			userBranchRepository.save(userBranch.get());
-			
-			Optional<UserRole> userRole = userRoleRepository.findById(userDto.getUserRoleId());
-			Optional<Role> role = roleRepository.findById(userDto.getRoleId());
-			userRole.get().setRole(role.get());
-			userRoleRepository.save(userRole.get());
+//			Optional<UserBranch> userBranch = userBranchRepository.findById(userDto.getUserBranchId());
+//			userBranch.get().setUpdatedBy(userCode);
+//			userBranch.get().setUpdatedDate(new Date(epoch));
+//			Optional<Branch> branch = branchRepository.findById(userDto.getBranchId());
+//			userBranch.get().setBranch(branch.get());
+//			userBranchRepository.save(userBranch.get());
+//
+//			Optional<UserRole> userRole = userRoleRepository.findById(userDto.getUserRoleId());
+//			Optional<Role> role = roleRepository.findById(userDto.getRoleId());
+//			userRole.get().setRole(role.get());
+//			userRoleRepository.save(userRole.get());
 
 			return ResponseEntity.ok().body(new Response("00", "User berhasil diupdate"));
 			

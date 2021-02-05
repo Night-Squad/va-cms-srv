@@ -19,16 +19,13 @@ public class CustomUser extends User {
     private final long userId;
     private final int applicationId;
     private final String userRealName;
-    private final Map<String, List<RoleMenuDTO>> userRoleMenu;
 
     public CustomUser(String username, String password, String userRealName,
-                      Collection<? extends GrantedAuthority> authorities, long userId, int applicationId, Map<String, List<RoleMenuDTO>> userRoleMenu) {
+                      Collection<? extends GrantedAuthority> authorities, long userId, int applicationId) {
         super(username, password, authorities);
         this.userId = userId;
         this.applicationId = applicationId;
         this.userRealName = userRealName;
-        this.userRoleMenu = userRoleMenu;
-  
     }
 
 	public long getUserId() {
@@ -39,9 +36,6 @@ public class CustomUser extends User {
 	}
 	public String getUserRealName() {
 		return userRealName;
-	}
-	public Map<String, List<RoleMenuDTO>> getUserRoleMenu() {
-		return userRoleMenu;
 	}
 	
 }

@@ -47,7 +47,6 @@ public class Users implements java.io.Serializable {
 	private String createdBy;
 	private Date updatedDate;
 	private String updatedBy;
-	private Set<UserRole> userRoles = new HashSet<UserRole>(0);
 
 	public Users() {
 	}
@@ -62,7 +61,7 @@ public class Users implements java.io.Serializable {
 			String userLinkedInUrl, Date userBirthdate, String userBirthplace, Short userGender, String userAddress,
 			String userPostalCode, String userFeedbackMethod, String userLifestyleAspiration, String userRedflags,
 			String userPredictableTimeOff, String userImageProfile, Short userMaritalStatus, Short isActive,
-			Short isFreshUser, String userRealName, Set<UserRole> userRoles) {
+			Short isFreshUser, String userRealName) {
 		this.userId = userId;
 		this.userName = userName;
 		this.userEmail = userEmail;
@@ -83,12 +82,11 @@ public class Users implements java.io.Serializable {
 		this.isActive = isActive;
 		this.isFreshUser = isFreshUser;
 		this.userRealName = userRealName;
-		this.userRoles = userRoles;
 	}
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "user_id", unique = true, nullable = false)
+	@Column(name = "id", unique = true, nullable = false)
 	public Long getUserId() {
 		return this.userId;
 	}
@@ -97,7 +95,7 @@ public class Users implements java.io.Serializable {
 		this.userId = userId;
 	}
 
-	@Column(name = "user_name", length = 50)
+	@Column(name = "username", length = 50)
 	public String getUserName() {
 		return this.userName;
 	}
@@ -259,15 +257,6 @@ public class Users implements java.io.Serializable {
 	public void setIsFreshUser(Short isFreshUser) {
 		this.isFreshUser = isFreshUser;
 	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "users")
-	public Set<UserRole> getUserRoles() {
-		return this.userRoles;
-	}
-
-	public void setUserRoles(Set<UserRole> userRoles) {
-		this.userRoles = userRoles;
-	}
 	
 	@Column(name = "password", nullable = false)
 	public String getPassword() {
@@ -287,7 +276,7 @@ public class Users implements java.io.Serializable {
 		this.userRealName = userRealName;
 	}
 	
-	@Column(name = "created_date", columnDefinition = "DATE")
+	@Column(name = "created_at", columnDefinition = "DATE")
 	public Date getCreatedDate() {
 		return createdDate;
 	}
@@ -305,7 +294,7 @@ public class Users implements java.io.Serializable {
 		this.createdBy = createdBy;
 	}
 	
-	@Column(name = "updated_date", columnDefinition = "DATE")
+	@Column(name = "updated_at", columnDefinition = "DATE")
 	public Date getUpdatedDate() {
 		return updatedDate;
 	}

@@ -50,6 +50,7 @@ public class JwtUsernameAndPasswordAuthenticationFilter extends UsernamePassword
 
 		try {
 			UserCredentials creds = new ObjectMapper().readValue(request.getInputStream(), UserCredentials.class);
+
 			UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(
 					creds.getUsername(), SHA_256.digestAsHex(creds.getPassword()), Collections.emptyList());
 

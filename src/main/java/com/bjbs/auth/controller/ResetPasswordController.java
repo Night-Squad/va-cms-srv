@@ -26,9 +26,7 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.bjbs.auth.models.ViewUserManagement;
 import com.bjbs.auth.repositories.UsersRepository;
-import com.bjbs.auth.repositories.ViewUserManagementRepository;
 
 @RestController
 public class ResetPasswordController {
@@ -59,10 +57,7 @@ public class ResetPasswordController {
 	
 	@Autowired
 	UsersRepository userRepo;
-	
-	@Autowired
-	ViewUserManagementRepository viewUserManagementRepository;
-	
+
 	private String newPass = "";
 	
 	public String generateCommonLangPassword() {
@@ -93,8 +88,7 @@ public class ResetPasswordController {
 		props.put("mail.smtp.connectiontimeout", connectiontimeout);
 		props.put("mail.smtp.timeout", timeout);
 		props.put("mail.smtp.writetimeout", writetimeout);
-		
-		ViewUserManagement usermanagement = viewUserManagementRepository.findUserManagementByUserId(userId);
+
 		String emailReceiver = userRepo.getOne(userId).getUserEmail();
 		String contentBody = "<!DOCTYPE html>\r\n" + 
 				"<html>\r\n" + 
@@ -212,42 +206,26 @@ public class ResetPasswordController {
 				"                        <td align=\"left\" bgcolor=\"#ffffff\"\r\n" + 
 				"                            style=\"width: 25%; padding-left: 40px; font-family: HelveticaNeueLight, Arial, sans-serif; font-weight: 300; font-stretch: normal; font-size: 14px; line-height: 28px; letter-spacing: .50px; color: #333333;\">\r\n" + 
 				"                            Username\r\n" + 
-				"                        </td>\r\n" + 
-				"                        <td align=\"left\" bgcolor=\"#ffffff\"\r\n" + 
-				"                            style=\"width: 75%; padding-left: 40px; font-family: HelveticaNeueLight, Arial, sans-serif; font-weight: 300; font-stretch: normal; font-size: 14px; line-height: 28px; letter-spacing: .50px; color: #333333;\">\r\n" + 
-				"                            : " + usermanagement.getUserName() + "\r\n" + 
-				"                        </td>\r\n" + 
+				"                        </td>\r\n" +
 				"                    </tr>\r\n" + 
 				"                    <tr>\r\n" + 
 				"                        <td align=\"left\" bgcolor=\"#ffffff\"\r\n" + 
 				"                            style=\"width: 25%; padding-left: 40px; font-family: HelveticaNeueLight, Arial, sans-serif; font-weight: 300; font-stretch: normal; font-size: 14px; line-height: 28px; letter-spacing: .50px; color: #333333;\">\r\n" + 
 				"                            Nama Lengkap\r\n" + 
-				"                        </td>\r\n" + 
-				"                        <td align=\"left\" bgcolor=\"#ffffff\"\r\n" + 
-				"                            style=\"width: 75%; padding-left: 40px; font-family: HelveticaNeueLight, Arial, sans-serif; font-weight: 300; font-stretch: normal; font-size: 14px; line-height: 28px; letter-spacing: .50px; color: #333333;\">\r\n" + 
-				"                            : " + usermanagement.getUserRealName() + "\r\n" + 
-				"                        </td>\r\n" + 
-				"                    </tr>\r\n" + 
+				"                        </td>\r\n" +
+				"                    </tr>\r\n" +
 				"                    <tr>\r\n" + 
 				"                        <td align=\"left\" bgcolor=\"#ffffff\"\r\n" + 
 				"                            style=\"width: 25%; padding-left: 40px; font-family: HelveticaNeueLight, Arial, sans-serif; font-weight: 300; font-stretch: normal; font-size: 14px; line-height: 28px; letter-spacing: .50px; color: #333333;\">\r\n" + 
 				"                            Cabang\r\n" + 
 				"                        </td>\r\n" + 
-				"                        <td align=\"left\" bgcolor=\"#ffffff\"\r\n" + 
-				"                            style=\"width: 75%; padding-left: 40px; font-family: HelveticaNeueLight, Arial, sans-serif; font-weight: 300; font-stretch: normal; font-size: 14px; line-height: 28px; letter-spacing: .50px; color: #333333;\">\r\n" + 
-				"                            : " + usermanagement.getBranchCode() + " - " + usermanagement.getBranchName() +"\r\n" + 
-				"                        </td>\r\n" + 
-				"                    </tr>\r\n" + 
+				"                    </tr>\r\n" +
 				"                    <tr>\r\n" + 
 				"                        <td align=\"left\" bgcolor=\"#ffffff\"\r\n" + 
 				"                            style=\"width: 25%; padding-left: 40px; font-family: HelveticaNeueLight, Arial, sans-serif; font-weight: 300; font-stretch: normal; font-size: 14px; line-height: 28px; letter-spacing: .50px; color: #333333;\">\r\n" + 
 				"                            Role\r\n" + 
 				"                        </td>\r\n" + 
-				"                        <td align=\"left\" bgcolor=\"#ffffff\"\r\n" + 
-				"                            style=\"width: 75%; padding-left: 40px; font-family: HelveticaNeueLight, Arial, sans-serif; font-weight: 300; font-stretch: normal; font-size: 14px; line-height: 28px; letter-spacing: .50px; color: #333333;\">\r\n" + 
-				"                            : " + usermanagement.getRoleName() + " \r\n" + 
-				"                        </td>\r\n" + 
-				"                    </tr>\r\n" + 
+				"                    </tr>\r\n" +
 				"                    <tr>\r\n" + 
 				"                        <td align=\"left\" bgcolor=\"#ffffff\"\r\n" + 
 				"                            style=\"width: 25%; padding-left: 40px; font-family: HelveticaNeueLight, Arial, sans-serif; font-weight: 300; font-stretch: normal; font-size: 14px; line-height: 28px; letter-spacing: .50px; color: #333333;\">\r\n" + 

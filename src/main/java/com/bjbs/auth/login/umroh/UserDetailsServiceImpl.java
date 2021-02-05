@@ -16,9 +16,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.bjbs.auth.dtos.CustomUser;
-import com.bjbs.auth.dtos.RoleMenuDTO;
-import com.bjbs.auth.models.RoleMenu;
-import com.bjbs.auth.models.UserRole;
 import com.bjbs.auth.models.Users;
 import com.bjbs.auth.repositories.UsersRepository;
 
@@ -40,27 +37,10 @@ public class UserDetailsServiceImpl implements UserDetailsService  {
 		Users users = UsersRepository.findUserByUsername(username);
 
 		if(users != null) {
-			Map<String, List<RoleMenuDTO>> userRoleMenu = new HashMap<>();
-			for	(UserRole userRole: users.getUserRoles()) {
-				List<RoleMenuDTO> listRoleMenuDTO = new ArrayList<>();
-				for (RoleMenu roleMenus: userRole.getRole().getRoleMenus()) {
-					RoleMenuDTO roleMenuDTO = new RoleMenuDTO();
-					roleMenuDTO.setRoleMenuId(roleMenus.getRoleMenuId());
-					roleMenuDTO.setMenuId(roleMenus.getMenu().getMenuId());
-					roleMenuDTO.setMenuName(roleMenus.getMenu().getMenuName());
-					roleMenuDTO.setMenuDescription(roleMenus.getMenu().getMenuDescription());
-					roleMenuDTO.setMenuCategory(roleMenus.getMenu().getMenuCategory());
-					roleMenuDTO.setRoleId(roleMenus.getRole().getRoleId());
-					roleMenuDTO.setRoleName(roleMenus.getRole().getRoleName());
-					roleMenuDTO.setRoleDescription(roleMenus.getRole().getRoleDescription());
-					listRoleMenuDTO.add(roleMenuDTO) ;
-				}
-				userRoleMenu.put(userRole.getRole().getRoleName(), listRoleMenuDTO);
-			}
 			List<GrantedAuthority> grantedAuthorities = AuthorityUtils
 					.commaSeparatedStringToAuthorityList("ROLE_ADMIN");
-			return new CustomUser(users.getUserName(), encoder.encode(users.getPassword()), users.getUserRealName(), grantedAuthorities, 
-					users.getUserId(), applicationId, userRoleMenu);
+			return new CustomUser(users.getUserName(), encoder.encode(users.getPassword()), users.getUserRealName(), grantedAuthorities,
+					users.getUserId(), applicationId);
 		} 
 		throw new UsernameNotFoundException("Username: " + username + " not found");
 	}
