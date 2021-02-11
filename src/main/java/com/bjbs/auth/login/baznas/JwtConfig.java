@@ -1,4 +1,4 @@
-package com.bjbs.auth.login.umroh;
+package com.bjbs.auth.login.baznas;
 
 import org.springframework.beans.factory.annotation.Value;
 

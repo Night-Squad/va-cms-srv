@@ -1,4 +1,4 @@
-package com.bjbs.auth.login.umroh;
+package com.bjbs.auth.login.baznas;
 
 import javax.servlet.http.HttpServletResponse;
 

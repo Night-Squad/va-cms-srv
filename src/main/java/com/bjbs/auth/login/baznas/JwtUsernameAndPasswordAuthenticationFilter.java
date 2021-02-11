@@ -1,4 +1,4 @@
-package com.bjbs.auth.login.umroh;
+package com.bjbs.auth.login.baznas;
 
 import java.io.IOException;
 import java.sql.Date;
