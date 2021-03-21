@@ -14,7 +14,7 @@ import com.bjbs.auth.models.Users;
 @Repository
 public interface UsersRepository extends JpaRepository<Users, Long> {
 	
-@Query(value = "SELECT * FROM users u WHERE u.username = ?1",nativeQuery = true)
+@Query(value = "SELECT * FROM v_login u WHERE u.username = ?1",nativeQuery = true)
 public Users findUserByUsername(String username);
 
 @Modifying
