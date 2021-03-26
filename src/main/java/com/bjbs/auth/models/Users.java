@@ -55,7 +55,10 @@ public class Users implements java.io.Serializable {
 	private String namaLembaga;
 	private Integer refDivisionId;
 	private Integer refLembagaId;
-	
+	private String norekOperasional;
+    private String namaBankOperasional;
+    private String norekPenyaluranDana;
+    private String namaBankPenyaluranDana;
 	
 
 	public Users() {
@@ -107,32 +110,8 @@ public class Users implements java.io.Serializable {
 		this.namaLembaga = namaLembaga;
 	}
 	
-	public Users(Long userId, String userName, String userEmail, String userPhoneNumber, String userMotto,
-			String userLinkedInUrl, Date userBirthdate, String userBirthplace, Short userGender, String userAddress,
-			String userPostalCode, String userFeedbackMethod, String userLifestyleAspiration, String userRedflags,
-			String userPredictableTimeOff, String userImageProfile, Short userMaritalStatus, Short isActive,
-			Short isFreshUser, String userRealName) {
-		this.userId = userId;
-		this.userName = userName;
-		this.userEmail = userEmail;
-		this.userPhoneNumber = userPhoneNumber;
-		this.userMotto = userMotto;
-		this.userLinkedInUrl = userLinkedInUrl;
-		this.userBirthdate = userBirthdate;
-		this.userBirthplace = userBirthplace;
-		this.userGender = userGender;
-		this.userAddress = userAddress;
-		this.userPostalCode = userPostalCode;
-		this.userFeedbackMethod = userFeedbackMethod;
-		this.userLifestyleAspiration = userLifestyleAspiration;
-		this.userRedflags = userRedflags;
-		this.userPredictableTimeOff = userPredictableTimeOff;
-		this.userImageProfile = userImageProfile;
-		this.userMaritalStatus = userMaritalStatus;
-		this.isActive = isActive;
-		this.isFreshUser = isFreshUser;
-		this.userRealName = userRealName;
-	}
+	
+	
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -434,6 +413,90 @@ public class Users implements java.io.Serializable {
 
 	public void setRefLembagaId(Integer refLembagaId) {
 		this.refLembagaId = refLembagaId;
+	}
+
+	@Column(name = "norek_operasional")
+	public String getNorekOperasional() {
+		return norekOperasional;
+	}
+
+	public void setNorekOperasional(String norekOperasional) {
+		this.norekOperasional = norekOperasional;
+	}
+
+	@Column(name = "nama_bank_operasional")
+	public String getNamaBankOperasional() {
+		return namaBankOperasional;
+	}
+
+	public void setNamaBankOperasional(String namaBankOperasional) {
+		this.namaBankOperasional = namaBankOperasional;
+	}
+
+	@Column(name = "norek_penyaluran_dana")
+	public String getNorekPenyaluranDana() {
+		return norekPenyaluranDana;
+	}
+
+	public void setNorekPenyaluranDana(String norekPenyaluranDana) {
+		this.norekPenyaluranDana = norekPenyaluranDana;
+	}
+
+	@Column(name = "nama_bank_penyaluran_dana")
+	public String getNamaBankPenyaluranDana() {
+		return namaBankPenyaluranDana;
+	}
+
+	public Users(Long userId, String userName, String userEmail, String userPhoneNumber, String userMotto,
+			String userLinkedInUrl, Date userBirthdate, String userBirthplace, String password, Short userGender,
+			String userAddress, String userPostalCode, String userFeedbackMethod, String userLifestyleAspiration,
+			String userRedflags, String userPredictableTimeOff, String userImageProfile, Short userMaritalStatus,
+			Short isActive, Short isFreshUser, String userRealName, Date createdDate, String createdBy,
+			Date updatedDate, String updatedBy, Integer refTitleId, String titleCode, String titleName, Integer level,
+			String divisionName, String namaLembaga, Integer refDivisionId, Integer refLembagaId,
+			String norekOperasional, String namaBankOperasional, String norekPenyaluranDana,
+			String namaBankPenyaluranDana) {
+		this.userId = userId;
+		this.userName = userName;
+		this.userEmail = userEmail;
+		this.userPhoneNumber = userPhoneNumber;
+		this.userMotto = userMotto;
+		this.userLinkedInUrl = userLinkedInUrl;
+		this.userBirthdate = userBirthdate;
+		this.userBirthplace = userBirthplace;
+		this.password = password;
+		this.userGender = userGender;
+		this.userAddress = userAddress;
+		this.userPostalCode = userPostalCode;
+		this.userFeedbackMethod = userFeedbackMethod;
+		this.userLifestyleAspiration = userLifestyleAspiration;
+		this.userRedflags = userRedflags;
+		this.userPredictableTimeOff = userPredictableTimeOff;
+		this.userImageProfile = userImageProfile;
+		this.userMaritalStatus = userMaritalStatus;
+		this.isActive = isActive;
+		this.isFreshUser = isFreshUser;
+		this.userRealName = userRealName;
+		this.createdDate = createdDate;
+		this.createdBy = createdBy;
+		this.updatedDate = updatedDate;
+		this.updatedBy = updatedBy;
+		this.refTitleId = refTitleId;
+		this.titleCode = titleCode;
+		this.titleName = titleName;
+		this.level = level;
+		this.divisionName = divisionName;
+		this.namaLembaga = namaLembaga;
+		this.refDivisionId = refDivisionId;
+		this.refLembagaId = refLembagaId;
+		this.norekOperasional = norekOperasional;
+		this.namaBankOperasional = namaBankOperasional;
+		this.norekPenyaluranDana = norekPenyaluranDana;
+		this.namaBankPenyaluranDana = namaBankPenyaluranDana;
+	}
+
+	public void setNamaBankPenyaluranDana(String namaBankPenyaluranDana) {
+		this.namaBankPenyaluranDana = namaBankPenyaluranDana;
 	}
 
 }

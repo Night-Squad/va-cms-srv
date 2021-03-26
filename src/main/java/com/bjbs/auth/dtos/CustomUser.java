@@ -25,10 +25,15 @@ public class CustomUser extends User {
     private final String divisionName;
     private final int refLembagaId;
     private final String namaLembaga;
+    private final String norekOperasional;
+    private final String namaBankOperasional;
+    private final String norekPenyaluranDana;
+    private final String namaBankPenyaluranDana;
 
     public CustomUser(String username, String password, String userRealName,
                       Collection<? extends GrantedAuthority> authorities, long userId, int applicationId, int titleId,
-                      String titleCode, int refDivisionId, String divisionName, int refLembagaId, String namaLembaga) {
+                      String titleCode, int refDivisionId, String divisionName, int refLembagaId, String namaLembaga,
+                      String norekOperasional, String namaBankOperasional, String norekPenyaluranDana, String namaBankPenyaluranDana) {
         super(username, password, authorities);
         this.userId = userId;
         this.applicationId = applicationId;
@@ -39,6 +44,10 @@ public class CustomUser extends User {
         this.divisionName = divisionName;
         this.refLembagaId = refLembagaId;
         this.namaLembaga = namaLembaga;
+        this.norekOperasional = norekOperasional;
+        this.namaBankOperasional = namaBankOperasional;
+        this.norekPenyaluranDana = norekPenyaluranDana;
+        this.namaBankPenyaluranDana = namaBankPenyaluranDana;
 
     }
 
@@ -74,6 +83,22 @@ public class CustomUser extends User {
 
 	public String getNamaLembaga() {
 		return namaLembaga;
+	}
+
+	public String getNorekOperasional() {
+		return norekOperasional;
+	}
+
+	public String getNamaBankOperasional() {
+		return namaBankOperasional;
+	}
+
+	public String getNorekPenyaluranDana() {
+		return norekPenyaluranDana;
+	}
+
+	public String getNamaBankPenyaluranDana() {
+		return namaBankPenyaluranDana;
 	}
 	
 }

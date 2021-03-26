@@ -44,7 +44,7 @@ public class UserDetailsServiceImpl implements UserDetailsService  {
 					.commaSeparatedStringToAuthorityList("ROLE_ADMIN");
 			return new CustomUser(users.getUserName(), encoder.encode(users.getPassword()), users.getUserRealName(), grantedAuthorities,
 					users.getUserId(), applicationId, users.getRefTitleId(), users.getTitleCode(), users.getRefDivisionId(),
-					users.getDivisionName(), users.getRefLembagaId(), users.getNamaLembaga());
+					users.getDivisionName(), users.getRefLembagaId(), users.getNamaLembaga(), users.getNorekOperasional(), users.getNamaBankOperasional(), users.getNorekPenyaluranDana(), users.getNamaBankPenyaluranDana());
 		} 
 		throw new UsernameNotFoundException("Username: " + username + " not found");
 	}
