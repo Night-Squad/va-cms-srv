@@ -59,6 +59,7 @@ public class Users implements java.io.Serializable {
     private String namaBankOperasional;
     private String norekPenyaluranDana;
     private String namaBankPenyaluranDana;
+    private String simbaCode;
 	
 
 	public Users() {
@@ -76,7 +77,7 @@ public class Users implements java.io.Serializable {
 			String userRedflags, String userPredictableTimeOff, String userImageProfile, Short userMaritalStatus,
 			Short isActive, Short isFreshUser, String userRealName, Date createdDate, String createdBy,
 			Date updatedDate, String updatedBy, Integer refTitleId, String titleCode, String titleName, Integer level,
-			String divisionName, String namaLembaga) {
+			String divisionName, String namaLembaga, String simbaCode) {
 		this.userId = userId;
 		this.userName = userName;
 		this.userEmail = userEmail;
@@ -108,6 +109,7 @@ public class Users implements java.io.Serializable {
 		this.level = level;
 		this.divisionName = divisionName;
 		this.namaLembaga = namaLembaga;
+		this.simbaCode = simbaCode;
 	}
 	
 	
@@ -446,6 +448,19 @@ public class Users implements java.io.Serializable {
 	public String getNamaBankPenyaluranDana() {
 		return namaBankPenyaluranDana;
 	}
+	
+	public void setNamaBankPenyaluranDana(String namaBankPenyaluranDana) {
+		this.namaBankPenyaluranDana = namaBankPenyaluranDana;
+	}
+
+	@Column(name = "simba_code")
+	public String getSimbaCode() {
+		return simbaCode;
+	}
+
+	public void setSimbaCode(String simbaCode) {
+		this.simbaCode = simbaCode;
+	}
 
 	public Users(Long userId, String userName, String userEmail, String userPhoneNumber, String userMotto,
 			String userLinkedInUrl, Date userBirthdate, String userBirthplace, String password, Short userGender,
@@ -455,7 +470,7 @@ public class Users implements java.io.Serializable {
 			Date updatedDate, String updatedBy, Integer refTitleId, String titleCode, String titleName, Integer level,
 			String divisionName, String namaLembaga, Integer refDivisionId, Integer refLembagaId,
 			String norekOperasional, String namaBankOperasional, String norekPenyaluranDana,
-			String namaBankPenyaluranDana) {
+			String namaBankPenyaluranDana, String simbaCode) {
 		this.userId = userId;
 		this.userName = userName;
 		this.userEmail = userEmail;
@@ -493,10 +508,9 @@ public class Users implements java.io.Serializable {
 		this.namaBankOperasional = namaBankOperasional;
 		this.norekPenyaluranDana = norekPenyaluranDana;
 		this.namaBankPenyaluranDana = namaBankPenyaluranDana;
+		this.simbaCode = simbaCode;
 	}
 
-	public void setNamaBankPenyaluranDana(String namaBankPenyaluranDana) {
-		this.namaBankPenyaluranDana = namaBankPenyaluranDana;
-	}
+
 
 }

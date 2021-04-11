@@ -33,6 +33,9 @@ public class UserDetailsServiceImpl implements UserDetailsService  {
 		int applicationId = 0;
 		Users users = UsersRepository.findUserByUsername(username);
 		
+		System.out.println("Masuk Lewat Sini");
+		
+		
 //	      this.titleCode = titleCode;
 //	        this.refDivisionId = refDivisionId;
 //	        this.divisionName = divisionName;
@@ -44,8 +47,12 @@ public class UserDetailsServiceImpl implements UserDetailsService  {
 					.commaSeparatedStringToAuthorityList("ROLE_ADMIN");
 			return new CustomUser(users.getUserName(), encoder.encode(users.getPassword()), users.getUserRealName(), grantedAuthorities,
 					users.getUserId(), applicationId, users.getRefTitleId(), users.getTitleCode(), users.getRefDivisionId(),
-					users.getDivisionName(), users.getRefLembagaId(), users.getNamaLembaga(), users.getNorekOperasional(), users.getNamaBankOperasional(), users.getNorekPenyaluranDana(), users.getNamaBankPenyaluranDana());
+					users.getDivisionName(), users.getRefLembagaId(), users.getNamaLembaga(), users.getNorekOperasional(), users.getNamaBankOperasional(), 
+					users.getNorekPenyaluranDana(), users.getNamaBankPenyaluranDana(), users.getUserEmail(), users.getLevel(), users.getSimbaCode());
 		} 
+		
+		System.out.println("User email " + users.getUserEmail());
+		
 		throw new UsernameNotFoundException("Username: " + username + " not found");
 	}
 	

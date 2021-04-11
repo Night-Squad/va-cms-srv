@@ -29,11 +29,15 @@ public class CustomUser extends User {
     private final String namaBankOperasional;
     private final String norekPenyaluranDana;
     private final String namaBankPenyaluranDana;
+    private final String userEmail;
+    private final Integer level;
+    private final String simbaCode;
 
     public CustomUser(String username, String password, String userRealName,
                       Collection<? extends GrantedAuthority> authorities, long userId, int applicationId, int titleId,
                       String titleCode, int refDivisionId, String divisionName, int refLembagaId, String namaLembaga,
-                      String norekOperasional, String namaBankOperasional, String norekPenyaluranDana, String namaBankPenyaluranDana) {
+                      String norekOperasional, String namaBankOperasional, String norekPenyaluranDana, 
+                      String namaBankPenyaluranDana, String userEmail, int level, String simbaCode) {
         super(username, password, authorities);
         this.userId = userId;
         this.applicationId = applicationId;
@@ -48,6 +52,9 @@ public class CustomUser extends User {
         this.namaBankOperasional = namaBankOperasional;
         this.norekPenyaluranDana = norekPenyaluranDana;
         this.namaBankPenyaluranDana = namaBankPenyaluranDana;
+        this.userEmail = userEmail;
+        this.level = level;
+        this.simbaCode = simbaCode;
 
     }
 
@@ -99,6 +106,18 @@ public class CustomUser extends User {
 
 	public String getNamaBankPenyaluranDana() {
 		return namaBankPenyaluranDana;
+	}
+	
+	public String getUserEmail() {
+		return userEmail;
+	}
+
+	public Integer getLevel() {
+		return level;
+	}
+
+	public String getSimbaCode() {
+		return simbaCode;
 	}
 	
 }
