@@ -9,10 +9,10 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>	 
 	<groupId>com.bjbs</groupId>
-	<artifactId>bjbs-auth</artifactId>
+	<artifactId>va-auth</artifactId>
 	<version>0.0.1</version>
-	<name>bjbs-auth</name>
-	<description>BJBS Authentication</description>
+	<name>server-auth</name>
+	<description>Authentication</description>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -26,12 +26,7 @@
 	  <groupId>org.springframework.boot</groupId>
 	  <artifactId>spring-boot-starter-security</artifactId>
 	</dependency>
-	
-		<dependency>
-			<groupId>com.io</groupId>
-			<artifactId>iona-springboot</artifactId>
-			<version>2.0.0-BETA-32</version>	
-		</dependency>
+
 		
         <dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -86,11 +81,7 @@
 		    <groupId>org.springframework.data</groupId>
 		    <artifactId>spring-data-jpa</artifactId>
 		</dependency>
-        		
-		<dependency>
-			<groupId>org.springframework.cloud</groupId>
-			<artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
-		</dependency>
+
 
 		<dependency>
 			<groupId>org.hibernate</groupId>
@@ -115,7 +106,13 @@
 			<artifactId>poi-ooxml</artifactId>
 			<version>4.1.1</version>
 		</dependency>
-		
+		<dependency>
+			<groupId>com.vaadin.external.google</groupId>
+			<artifactId>android-json</artifactId>
+			<version>0.0.20131108.vaadin1</version>
+			<scope>compile</scope>
+		</dependency>
+
 	</dependencies>
 
 	<dependencyManagement>
@@ -156,15 +153,6 @@
 			<id>spring-milestones</id>
 			<name>Spring Milestones</name>
 			<url>https://repo.spring.io/milestone</url>
-			<snapshots>
-				<enabled>false</enabled>
-			</snapshots>
-		</repository>
-
-		<repository>
-			<id>padepokan-79-central</id>
-			<name>Padepokan 79 Central Repository</name>
-			<url>http://hrmspadepokan79.ddnsfree.com:8081/repository/padepokan-79-central-hosted/</url>
 			<snapshots>
 				<enabled>false</enabled>
 			</snapshots>

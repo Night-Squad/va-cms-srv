@@ -6,16 +6,12 @@
     <session-factory>
         <property name="hibernate.bytecode.use_reflection_optimizer">false</property>
         <property name="hibernate.connection.driver_class">org.postgresql.Driver</property>
-        <property name="hibernate.connection.password">Kmzwa8ws41</property>
-        <property name="hibernate.connection.url">jdbc:bjbs_baznas://158.140.183.245:2345/bjbs_baznas</property>
+        <property name="hibernate.connection.password">ak4r01092023#@</property>
+        <property name="hibernate.connection.url">jdbc:postgresql://18.143.161.150:5432/va_v2</property>
         <property name="hibernate.connection.username">postgres</property>
         <property name="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</property>
         <property name="hibernate.search.autoregister_listeners">false</property>
         <property name="hibernate.validator.apply_to_ddl">false</property>
-        <mapping class="com.bjbs.auth.models.Menu" />
-        <mapping class="com.bjbs.auth.models.Role" />
-        <mapping class="com.bjbs.auth.models.RoleMenu" />
-        <mapping class="com.bjbs.auth.models.UserRole" />
-        <mapping class="com.bjbs.auth.models.Users" />
+        <mapping class="com.va.auth.models.Users" />
     </session-factory>
 </hibernate-configuration>
