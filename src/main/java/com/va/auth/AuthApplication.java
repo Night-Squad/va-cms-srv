@@ -9,7 +9,7 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 public class AuthApplication {
 
 	public static void main(String[] args) {
-		System.out.println("testing cicd...");
+		System.out.println("testing cicd..");
 		SpringApplication.run(AuthApplication.class, args);
 	}
 
