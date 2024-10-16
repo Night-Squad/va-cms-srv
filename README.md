@@ -1,2 +1,2 @@
-# auth-server-va
+# auth-server
 
