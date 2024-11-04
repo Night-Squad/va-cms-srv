@@ -1,4 +1,4 @@
-package com.server.auth.config;
+package com.va.cms.srv.config;
 
 import java.security.KeyFactory;
 import java.security.PrivateKey;

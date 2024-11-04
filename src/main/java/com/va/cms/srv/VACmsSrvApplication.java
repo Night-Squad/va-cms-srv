@@ -1,15 +1,15 @@
-package com.server.auth;
+package com.va.cms.srv;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 
-@SpringBootApplication(scanBasePackages={"com.server.auth"})
+@SpringBootApplication(scanBasePackages={"com.va.cms.srv"})
 @EnableConfigurationProperties
-public class AuthApplication {
+public class VACmsSrvApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(AuthApplication.class, args);
+		SpringApplication.run(VACmsSrvApplication.class, args);
 	}
 
 }

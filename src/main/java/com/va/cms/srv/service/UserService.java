@@ -1,9 +1,9 @@
-package com.server.auth.service;
+package com.va.cms.srv.service;
 
 
-import com.server.auth.controller.dto.SignupRequestDto;
-import com.server.auth.domain.UserDomain;
-import com.server.auth.repository.UserRepository;
+import com.va.cms.srv.controller.dto.SignupRequestDto;
+import com.va.cms.srv.domain.UserDomain;
+import com.va.cms.srv.repository.UserRepository;
 import com.sun.jdi.request.DuplicateRequestException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;

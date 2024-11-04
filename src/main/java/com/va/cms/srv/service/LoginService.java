@@ -1,7 +1,7 @@
-package com.server.auth.service;
+package com.va.cms.srv.service;
 
-import com.server.auth.domain.LoginAttempDomain;
-import com.server.auth.repository.LoginAttemptRepository;
+import com.va.cms.srv.domain.LoginAttempDomain;
+import com.va.cms.srv.repository.LoginAttemptRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

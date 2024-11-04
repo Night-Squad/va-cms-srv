@@ -1,8 +1,8 @@
-package com.server.auth.service;
+package com.va.cms.srv.service;
 
 
-import com.server.auth.domain.UserDomain;
-import com.server.auth.repository.UserRepository;
+import com.va.cms.srv.domain.UserDomain;
+import com.va.cms.srv.repository.UserRepository;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;

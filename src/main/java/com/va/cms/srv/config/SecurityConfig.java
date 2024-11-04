@@ -1,6 +1,6 @@
-package com.server.auth.config;
+package com.va.cms.srv.config;
 
-import com.server.auth.service.UserDetailServiceImpl;
+import com.va.cms.srv.service.UserDetailServiceImpl;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;

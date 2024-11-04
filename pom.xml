@@ -8,11 +8,11 @@
 		<version>3.3.4</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>	 
-	<groupId>com.server.auth</groupId>
-	<artifactId>server-auth</artifactId>
+	<groupId>com.va.cms.srv</groupId>
+	<artifactId>va.cms.srv</artifactId>
 	<version>0.0.1</version>
-	<name>server-auth</name>
-	<description>Authentication</description>
+	<name>va.cms.srv</name>
+	<description>VA CMS Service</description>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -29,10 +29,7 @@
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
 
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-security</artifactId>
-		</dependency>
+
 
 		<!-- DB -->
 		<dependency>

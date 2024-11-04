@@ -1,4 +1,4 @@
-package com.server.auth.helper;
+package com.va.cms.srv.helper;
 
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.Keys;

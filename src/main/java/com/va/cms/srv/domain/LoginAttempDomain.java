@@ -1,4 +1,4 @@
-package com.server.auth.domain;
+package com.va.cms.srv.domain;
 
 import java.time.LocalDateTime;
 

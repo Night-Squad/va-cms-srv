@@ -1,9 +1,9 @@
-package com.server.auth.config;
+package com.va.cms.srv.config;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.server.auth.controller.dto.ApiErrorResponseDto;
-import com.server.auth.helper.JwtHelper;
-import com.server.auth.service.UserDetailServiceImpl;
+import com.va.cms.srv.controller.dto.ApiErrorResponseDto;
+import com.va.cms.srv.helper.JwtHelper;
+import com.va.cms.srv.service.UserDetailServiceImpl;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -16,7 +16,6 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
-import java.nio.file.AccessDeniedException;
 import java.security.PublicKey;
 
 @Component
