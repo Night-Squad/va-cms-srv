@@ -18,11 +18,6 @@ public class LoginService {
         this.repository = repository;
     }
 
-    @Transactional
-    public void addLoginAttempts(String email, boolean success) {
-        LoginAttempDomain loginAttempt = new LoginAttempDomain(email, success, LocalDateTime.now());
-    }
-
     public List<LoginAttempDomain> findRecentLoginAttempts(String email) {
         return repository.findRecent(email);
     }
