@@ -1,5 +1,5 @@
 server:
-  port: 9018
+  port: 9024
   # graceful shutdown makes sure we have time to finnish any ongoing rest requests before terminating
   # default value will be 30s before terminating
   shutdown: graceful
@@ -8,7 +8,7 @@ spring:
   application:
     name: server-auth
   datasource:
-    url: jdbc:postgresql://91.108.104.69:5433/nwn_auth?prepareThreshold=0
+    url: jdbc:postgresql://91.108.104.69:5433/va_cms?prepareThreshold=0
     driver-class-name: org.postgresql.Driver
     username: postgres
     password: ak4r01092023#@
