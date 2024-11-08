@@ -24,7 +24,31 @@ public class CompanyProfileController {
     @Autowired
     CompanyProfileService companyProfileService;
 
-    @Operation(summary = "Get recent login attempts")
+    @Operation(summary = "Geta all data of company_profiles")
+    @ApiResponse(responseCode = "201")
+    @ApiResponse(responseCode = "401", content = @Content(schema = @Schema(implementation = ApiErrorResponseDto.class)))
+    @ApiResponse(responseCode = "409", content = @Content(schema = @Schema(implementation = ApiErrorResponseDto.class)))
+    @ApiResponse(responseCode = "500", content = @Content(schema = @Schema(implementation = ApiErrorResponseDto.class)))
+    @GetMapping("/add")
+    public Map<String, Object> addData() {
+        try{
+            System.out.println("Company Profile : find-all");
+
+            List<CompanyProfileDomain> companyProfiles = companyProfileService.findAllCompanyProfile();
+
+            if(!companyProfiles.isEmpty()) {
+                return new ResponseMessage().success("00", 200, "success to obtain data.", companyProfiles);
+            }
+
+            return new ResponseMessage().success("99", 500, "data failed to fetch.", companyProfiles);
+        } catch (Exception e) {
+            System.out.println("Exception e : "+e.getMessage());
+            throw new RuntimeException(e);
+        }
+    }
+
+
+    @Operation(summary = "Geta all data of company_profiles")
     @ApiResponse(responseCode = "201")
     @ApiResponse(responseCode = "401", content = @Content(schema = @Schema(implementation = ApiErrorResponseDto.class)))
     @ApiResponse(responseCode = "409", content = @Content(schema = @Schema(implementation = ApiErrorResponseDto.class)))

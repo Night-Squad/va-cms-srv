@@ -21,4 +21,7 @@ public class CompanyProfileService {
     public List<CompanyProfileDomain> findAllCompanyProfile() {
         return repository.findAll();
     }
+
+    @Transactional
+    public void addCompanyProfile()
 }
