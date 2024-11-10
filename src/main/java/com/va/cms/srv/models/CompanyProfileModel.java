@@ -1,11 +1,9 @@
 package com.va.cms.srv.models;
 
+import jakarta.persistence.*;
+import org.springframework.data.annotation.CreatedDate;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
-
+import javax.validation.constraints.NotBlank;
 import java.time.LocalDateTime;
 
 @Entity
@@ -13,17 +11,22 @@ import java.time.LocalDateTime;
 public class CompanyProfileModel {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotBlank(message = "main_color_pallete is required")
     @Column(name = "main_color_pallete")
-    private String mainColorPalete;
+    private String mainColorPallete;
 
+    @NotBlank(message = "second_color_pallete is required")
     @Column(name = "second_color_pallete")
     private String secondColorPallete;
 
+    @NotBlank(message = "third_color_pallete is required")
     @Column(name = "third_color_pallete")
-    private String thirdColorPalete;
+    private String thirdColorPallete;
 
+    @NotBlank(message = "company_logo is required")
     @Column(name = "company_logo")
     private String companyLogo;
 
@@ -36,24 +39,46 @@ public class CompanyProfileModel {
     @Column(name = "error_color")
     private String errorColor;
 
-    @Column(name = "created_at")
-    private java.time.LocalDateTime createdAt;
+    @CreatedDate
+    @Column(name = "created_at", nullable = false, updatable = false)
+    private LocalDateTime createdAt;
 
     @Column(name = "created_by")
     private String createdBy;
 
     @Column(name = "updated_at")
-    private java.time.LocalDateTime updatedAt;
+    private LocalDateTime updatedAt;
 
     @Column(name = "updated_by")
     private String updatedBy;
 
+    @NotBlank(message = "is_active is required")
     @Column(name = "is_active")
     private Boolean isActive;
 
+    @NotBlank(message = "company_id is required")
     @Column(name = "company_id")
     private Integer companyId;
 
+    @Override
+    public String toString() {
+        return "CompanyProfileModel{" +
+                "id=" + id +
+                ", mainColorPallete='" + mainColorPallete + '\'' +
+                ", secondColorPallete='" + secondColorPallete + '\'' +
+                ", thirdColorPallete='" + thirdColorPallete + '\'' +
+                ", companyLogo='" + companyLogo + '\'' +
+                ", companyFavIcon='" + companyFavIcon + '\'' +
+                ", infoColor='" + infoColor + '\'' +
+                ", errorColor='" + errorColor + '\'' +
+                ", createdAt=" + createdAt +
+                ", createdBy='" + createdBy + '\'' +
+                ", updatedAt=" + updatedAt +
+                ", updatedBy='" + updatedBy + '\'' +
+                ", isActive=" + isActive +
+                ", companyId=" + companyId +
+                '}';
+    }
 
     public Long getId() {
         return id;
@@ -63,12 +88,12 @@ public class CompanyProfileModel {
         this.id = id;
     }
 
-    public String getMainColorPalete() {
-        return mainColorPalete;
+    public String getMainColorPallete() {
+        return mainColorPallete;
     }
 
-    public void setMainColorPalete(String mainColorPalete) {
-        this.mainColorPalete = mainColorPalete;
+    public void setMainColorPallete(String mainColorPallete) {
+        this.mainColorPallete = mainColorPallete;
     }
 
     public String getSecondColorPallete() {
@@ -79,12 +104,12 @@ public class CompanyProfileModel {
         this.secondColorPallete = secondColorPallete;
     }
 
-    public String getThirdColorPalete() {
-        return thirdColorPalete;
+    public String getThirdColorPallete() {
+        return thirdColorPallete;
     }
 
-    public void setThirdColorPalete(String thirdColorPalete) {
-        this.thirdColorPalete = thirdColorPalete;
+    public void setThirdColorPallete(String thirdColorPallete) {
+        this.thirdColorPallete = thirdColorPallete;
     }
 
     public String getCompanyLogo() {
@@ -155,8 +180,8 @@ public class CompanyProfileModel {
         return isActive;
     }
 
-    public void setActive(Boolean active) {
-        isActive = active;
+    public void setActive(Boolean is_active) {
+        isActive = is_active;
     }
 
     public Integer getCompanyId() {

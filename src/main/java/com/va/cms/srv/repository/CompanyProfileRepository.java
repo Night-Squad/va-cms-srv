@@ -1,11 +1,13 @@
 package com.va.cms.srv.repository;
 
 import com.va.cms.srv.domain.CompanyProfileDomain;
+import com.va.cms.srv.helper.NamingUtils;
 import com.va.cms.srv.models.CompanyProfileModel;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.simple.JdbcClient;
 import org.springframework.stereotype.Repository;
 
+import javax.validation.Valid;
 import java.lang.reflect.Field;
 import java.util.List;
 import java.util.Map;
@@ -25,7 +27,7 @@ public class CompanyProfileRepository {
         this.jdbcTemplate = jdbcTemplate;
     }
 
-    public int addCompanyProfile(CompanyProfileModel companyProfileModel) {
+    public void addCompanyProfile(CompanyProfileModel companyProfileModel) {
         Map<String, Object> columnValues = new HashMap<>();
 
         // Use reflection to get fields and their values dynamically
@@ -33,6 +35,7 @@ public class CompanyProfileRepository {
             field.setAccessible(true);
             try {
                 Object value = field.get(companyProfileModel);
+                // System.out.println("Field: " + field.getName() + ", Value: " + value); // Debug log
                 if (value != null) {
                     columnValues.put(field.getName(), value);
                 }
@@ -49,14 +52,14 @@ public class CompanyProfileRepository {
         StringJoiner columns = new StringJoiner(", ");
         StringJoiner placeholders = new StringJoiner(", ");
         columnValues.forEach((key, value) -> {
-            columns.add(key);
+            columns.add(NamingUtils.camelToSnake(key));
             placeholders.add("?");
         });
 
-        String sql = String.format("INSERT INTO users (%s) VALUES (%s)", columns, placeholders);
+        String sql = String.format("INSERT INTO public.company_profile (%s) VALUES (%s)", columns, placeholders);
 
         // Execute the SQL statement with the collected values
-        return jdbcTemplate.update(sql, columnValues.values().toArray());
+        jdbcTemplate.update(sql, columnValues.values().toArray());
     }
 
 

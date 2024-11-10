@@ -3,6 +3,7 @@ package com.va.cms.srv.controller;
 import com.va.cms.srv.controller.dto.ApiErrorResponseDto;
 import com.va.cms.srv.controller.response.ResponseMessage;
 import com.va.cms.srv.domain.CompanyProfileDomain;
+import com.va.cms.srv.models.CompanyProfileModel;
 import com.va.cms.srv.service.CompanyProfileService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -10,10 +11,9 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Map;
 
@@ -24,23 +24,20 @@ public class CompanyProfileController {
     @Autowired
     CompanyProfileService companyProfileService;
 
-    @Operation(summary = "Geta all data of company_profiles")
+    @Operation(summary = "Add data of company_profiles")
     @ApiResponse(responseCode = "201")
     @ApiResponse(responseCode = "401", content = @Content(schema = @Schema(implementation = ApiErrorResponseDto.class)))
     @ApiResponse(responseCode = "409", content = @Content(schema = @Schema(implementation = ApiErrorResponseDto.class)))
     @ApiResponse(responseCode = "500", content = @Content(schema = @Schema(implementation = ApiErrorResponseDto.class)))
-    @GetMapping("/add")
-    public Map<String, Object> addData() {
+    @PostMapping("/add")
+    public Map<String, Object> addData(@Valid @RequestBody CompanyProfileModel companyProfile) {
         try{
-            System.out.println("Company Profile : find-all");
+            System.out.println("Company Profile : add");
+            System.out.println("Request body: "+companyProfile.toString());
 
-            List<CompanyProfileDomain> companyProfiles = companyProfileService.findAllCompanyProfile();
+            companyProfileService.addCompanyProfile(companyProfile);
 
-            if(!companyProfiles.isEmpty()) {
-                return new ResponseMessage().success("00", 200, "success to obtain data.", companyProfiles);
-            }
-
-            return new ResponseMessage().success("99", 500, "data failed to fetch.", companyProfiles);
+            return new ResponseMessage().success("00", 200, "Success added.", companyProfile);
         } catch (Exception e) {
             System.out.println("Exception e : "+e.getMessage());
             throw new RuntimeException(e);

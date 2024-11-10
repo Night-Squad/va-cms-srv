@@ -3,6 +3,9 @@ package com.va.cms.srv.domain;
 import java.time.LocalDateTime;
 
 public record CompanyProfileDomain(
+
+        Integer id,
+
         String mainColorPallete,
         String secondColorPallete,
         String thirdColorPallete,
@@ -14,7 +17,7 @@ public record CompanyProfileDomain(
         String createdBy,
         LocalDateTime updatedAt,
         String updatedBy,
-        boolean isActive,
+        Boolean isActive,
         Integer companyId
 ) {
 }
