@@ -1,4 +1,4 @@
-package com.va.cms.srv.controller.dto;
+package com.va.corporate.srv.controller.dto;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 

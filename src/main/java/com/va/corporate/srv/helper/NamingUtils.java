@@ -1,4 +1,4 @@
-package com.va.cms.srv.helper;
+package com.va.corporate.srv.helper;
 
 public class NamingUtils {
     public static String camelToSnake(String camelCase) {

@@ -1,6 +1,6 @@
-package com.va.cms.srv.controller.dto;
+package com.va.corporate.srv.controller.dto;
 
-import com.va.cms.srv.domain.LoginAttempDomain;
+import com.va.corporate.srv.domain.LoginAttempDomain;
 import io.swagger.v3.oas.annotations.media.Schema;
 
 import java.time.LocalDateTime;

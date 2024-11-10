@@ -1,4 +1,4 @@
-package com.va.cms.srv.controller.response;
+package com.va.corporate.srv.controller.response;
 
 import org.springframework.http.HttpStatus;
 

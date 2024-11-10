@@ -1,12 +1,14 @@
-package com.va.cms.srv;
+package com.va.corporate.srv;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 
-@SpringBootApplication(scanBasePackages={"com.va.cms.srv"})
+@SpringBootApplication(scanBasePackages={"com.va.corporate.srv"})
 @EnableConfigurationProperties
 public class VACmsSrvApplication {
+
+	// CMS = Corporate Management System
 
 	public static void main(String[] args) {
 		SpringApplication.run(VACmsSrvApplication.class, args);

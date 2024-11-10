@@ -1,11 +1,10 @@
-package com.va.cms.srv.service;
+package com.va.corporate.srv.service;
 
 
-import com.va.cms.srv.domain.CompanyProfileDomain;
-import com.va.cms.srv.models.CompanyProfileModel;
-import com.va.cms.srv.repository.CompanyProfileRepository;
+import com.va.corporate.srv.domain.CompanyProfileDomain;
+import com.va.corporate.srv.models.CompanyProfileModel;
+import com.va.corporate.srv.repository.CompanyProfileRepository;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.annotation.Validated;
 
 import javax.validation.Valid;

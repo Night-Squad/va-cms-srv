@@ -1,4 +1,4 @@
-package com.va.cms.srv.domain;
+package com.va.corporate.srv.domain;
 
 import java.time.LocalDateTime;
 

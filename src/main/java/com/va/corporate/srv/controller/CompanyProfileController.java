@@ -1,10 +1,10 @@
-package com.va.cms.srv.controller;
+package com.va.corporate.srv.controller;
 
-import com.va.cms.srv.controller.dto.ApiErrorResponseDto;
-import com.va.cms.srv.controller.response.ResponseMessage;
-import com.va.cms.srv.domain.CompanyProfileDomain;
-import com.va.cms.srv.models.CompanyProfileModel;
-import com.va.cms.srv.service.CompanyProfileService;
+import com.va.corporate.srv.controller.dto.ApiErrorResponseDto;
+import com.va.corporate.srv.controller.response.ResponseMessage;
+import com.va.corporate.srv.domain.CompanyProfileDomain;
+import com.va.corporate.srv.models.CompanyProfileModel;
+import com.va.corporate.srv.service.CompanyProfileService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;

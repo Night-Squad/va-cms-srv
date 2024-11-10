@@ -1,13 +1,12 @@
-package com.va.cms.srv.repository;
+package com.va.corporate.srv.repository;
 
-import com.va.cms.srv.domain.CompanyProfileDomain;
-import com.va.cms.srv.helper.NamingUtils;
-import com.va.cms.srv.models.CompanyProfileModel;
+import com.va.corporate.srv.domain.CompanyProfileDomain;
+import com.va.corporate.srv.helper.NamingUtils;
+import com.va.corporate.srv.models.CompanyProfileModel;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.simple.JdbcClient;
 import org.springframework.stereotype.Repository;
 
-import javax.validation.Valid;
 import java.lang.reflect.Field;
 import java.util.List;
 import java.util.Map;

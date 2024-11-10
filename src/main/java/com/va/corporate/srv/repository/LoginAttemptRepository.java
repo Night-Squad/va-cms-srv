@@ -1,6 +1,6 @@
-package com.va.cms.srv.repository;
+package com.va.corporate.srv.repository;
 
-import com.va.cms.srv.domain.LoginAttempDomain;
+import com.va.corporate.srv.domain.LoginAttempDomain;
 import org.springframework.jdbc.core.simple.JdbcClient;
 import org.springframework.stereotype.Repository;
 import org.springframework.util.Assert;

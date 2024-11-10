@@ -1,4 +1,4 @@
-package com.va.cms.srv.models;
+package com.va.corporate.srv.models;
 
 import jakarta.persistence.*;
 import org.springframework.data.annotation.CreatedDate;
