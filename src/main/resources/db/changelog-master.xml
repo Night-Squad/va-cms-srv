@@ -7,7 +7,7 @@
         <dbms type="postgresql"/>
     </preConditions>
 
-    <include file="changelogs/0_schema.xml" relativeToChangelogFile="true"/>
-    <include file="changelogs/1_tables.xml" relativeToChangelogFile="true"/>
+<!--    <include file="changelogs/0_schema.xml" relativeToChangelogFile="true"/>-->
+<!--    <include file="changelogs/1_tables.xml" relativeToChangelogFile="true"/>-->
 
 </databaseChangeLog>
