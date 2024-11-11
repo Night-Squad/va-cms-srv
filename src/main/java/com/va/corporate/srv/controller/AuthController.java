@@ -1,6 +1,5 @@
 package com.va.corporate.srv.controller;
 
-import com.va.cms.srv.controller.dto.*;
 import com.va.corporate.srv.controller.dto.ApiErrorResponseDto;
 import com.va.corporate.srv.controller.response.ResponseMessage;
 import com.va.corporate.srv.domain.LoginAttempDomain;
@@ -42,7 +41,7 @@ public class AuthController {
                 messageResponse = "data is empty";
             }
 
-            return new ResponseMessage().success("00", 200, messageResponse, loginAttempts);
+            return new ResponseMessage().success("00", "success", 200, messageResponse, loginAttempts);
 
         } catch (Exception e) {
             System.out.println("Exception e");

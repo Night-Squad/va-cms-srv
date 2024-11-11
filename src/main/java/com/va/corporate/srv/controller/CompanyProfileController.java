@@ -1,8 +1,8 @@
 package com.va.corporate.srv.controller;
 
 import com.va.corporate.srv.controller.dto.ApiErrorResponseDto;
+import com.va.corporate.srv.controller.dto.PaginatedResponseDto;
 import com.va.corporate.srv.controller.response.ResponseMessage;
-import com.va.corporate.srv.domain.CompanyProfileDomain;
 import com.va.corporate.srv.models.CompanyProfileModel;
 import com.va.corporate.srv.service.CompanyProfileService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -14,7 +14,6 @@ import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -37,7 +36,7 @@ public class CompanyProfileController {
 
             companyProfileService.addCompanyProfile(companyProfile);
 
-            return new ResponseMessage().success("00", 200, "Success added.", companyProfile);
+            return new ResponseMessage().success("00", "success", 200, "Success added.", companyProfile);
         } catch (Exception e) {
             System.out.println("Exception e : "+e.getMessage());
             throw new RuntimeException(e);
@@ -51,17 +50,17 @@ public class CompanyProfileController {
     @ApiResponse(responseCode = "409", content = @Content(schema = @Schema(implementation = ApiErrorResponseDto.class)))
     @ApiResponse(responseCode = "500", content = @Content(schema = @Schema(implementation = ApiErrorResponseDto.class)))
     @GetMapping("/find-all")
-    public Map<String, Object> findAll() {
+    public Map<String, Object> findAll(@RequestParam(defaultValue =  "1") int page, @RequestParam(defaultValue = "10") int size) {
         try{
             System.out.println("Company Profile : find-all");
 
-            List<CompanyProfileDomain> companyProfiles = companyProfileService.findAllCompanyProfile();
+            PaginatedResponseDto<CompanyProfileModel> companyProfiles = companyProfileService.getPaginatedCompanyProfile(page, size);
 
-            if(!companyProfiles.isEmpty()) {
-                return new ResponseMessage().success("00", 200, "success to obtain data.", companyProfiles);
+            if(companyProfiles.getRows().isEmpty()) {
+                return new ResponseMessage().success("00", "success", 200, "success to obtain data, content is empty", companyProfiles);
             }
 
-            return new ResponseMessage().success("99", 500, "data failed to fetch.", companyProfiles);
+            return new ResponseMessage().success("00", "success", 200, "data fetch successfully", companyProfiles);
         } catch (Exception e) {
             System.out.println("Exception e : "+e.getMessage());
             throw new RuntimeException(e);
