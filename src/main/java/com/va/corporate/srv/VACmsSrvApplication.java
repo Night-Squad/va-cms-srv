@@ -11,6 +11,7 @@ public class VACmsSrvApplication {
 	// CMS = Corporate Management System
 
 	public static void main(String[] args) {
+		System.out.println("testing pipeline..");
 		SpringApplication.run(VACmsSrvApplication.class, args);
 	}
 
