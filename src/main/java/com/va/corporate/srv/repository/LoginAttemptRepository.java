@@ -14,27 +14,26 @@ public class LoginAttemptRepository {
     private static final String INSERT = "INSERT INTO authentication.login_attempt (email, success, createe_at) VALUES (:email, :success, :created_at)";
     private static final String FIND_RECENT = "SELECT * FROM authentication.login_attempt where email = :email ORDER BY created_at DESC LIMIT :recentCount";
 
-    private final JdbcClient jdbcClient;
 
-    public LoginAttemptRepository(JdbcClient jdbcClient) {
-        this.jdbcClient = jdbcClient;
-    }
+//    public LoginAttemptRepository(JdbcClient jdbcClient) {
+//        this.jdbcClient = jdbcClient;
+//    }
 
-    public void add(LoginAttempDomain loginAttempt) {
-        long affected = jdbcClient.sql(INSERT)
-                .param("email", loginAttempt.email())
-                .param("success", loginAttempt.success())
-                .param("createdAt", loginAttempt.createdAt())
-                .update();
-
-        Assert.isTrue(affected == 1, "Could not add login attempt.");
-    }
-
-    public List<LoginAttempDomain> findRecent(String email) {
-        return jdbcClient.sql(FIND_RECENT)
-                .param("email", email)
-                .param("recentCount", RECENT_COUNT)
-                .query(LoginAttempDomain.class)
-                .list();
-    }
+//    public void add(LoginAttempDomain loginAttempt) {
+//        long affected = jdbcClient.sql(INSERT)
+//                .param("email", loginAttempt.email())
+//                .param("success", loginAttempt.success())
+//                .param("createdAt", loginAttempt.createdAt())
+//                .update();
+//
+//        Assert.isTrue(affected == 1, "Could not add login attempt.");
+//    }
+//
+//    public List<LoginAttempDomain> findRecent(String email) {
+//        return jdbcClient.sql(FIND_RECENT)
+//                .param("email", email)
+//                .param("recentCount", RECENT_COUNT)
+//                .query(LoginAttempDomain.class)
+//                .list();
+//    }
 }

@@ -17,7 +17,7 @@ public class LoginService {
         this.repository = repository;
     }
 
-    public List<LoginAttempDomain> findRecentLoginAttempts(String email) {
-        return repository.findRecent(email);
-    }
+//    public List<LoginAttempDomain> findRecentLoginAttempts(String email) {
+//        return repository.findRecent(email);
+//    }
 }

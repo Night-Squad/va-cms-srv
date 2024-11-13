@@ -1,11 +1,9 @@
 package com.va.corporate.srv.repository;
 
-import com.va.corporate.srv.domain.CompanyProfileDomain;
 import com.va.corporate.srv.helper.NamingUtils;
 import com.va.corporate.srv.models.CompanyProfileModel;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.simple.JdbcClient;
 import org.springframework.stereotype.Repository;
 
 import java.lang.reflect.Field;
@@ -20,11 +18,9 @@ public class CompanyProfileRepository {
     private static final String FINDALL = "SELECT * FROM company_profile LIMIT ? OFFSET ?";
     private static final String COUNTALL = "SELECT COUNT(*) FROM company_profile";
     private static final String INSERT = "INSERT INTO company_profile (main_color_pallete, second_color_pallete, third_color_pallete, company_logo, company_fav_icon, info_color, error_color, created_at, created_by, is_active, company_id) VALUES (, :main_color_pallete, :second_color_pallete, :third_color_pallete, :company_logo, :company_fav_icon, :info_color, :error_color, :created_at, :created_by, :is_active, :company_id)";
-    private final JdbcClient jdbcClient;
     private final JdbcTemplate jdbcTemplate;
 
-    public CompanyProfileRepository(JdbcTemplate jdbcTemplate, JdbcClient jdbcClient) {
-        this.jdbcClient = jdbcClient;
+    public CompanyProfileRepository(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }
 

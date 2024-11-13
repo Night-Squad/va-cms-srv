@@ -34,14 +34,16 @@ public class AuthController {
         try {
             System.out.println("loginAttempts..");
 
-            List<LoginAttempDomain> loginAttempts = loginService.findRecentLoginAttempts("hello");
-            String messageResponse = "success to load the data..";
+//            List<LoginAttempDomain> loginAttempts = loginService.findRecentLoginAttempts("hello");
+//            String messageResponse = "success to load the data..";
+//
+//            if(loginAttempts.isEmpty()) {
+//                messageResponse = "data is empty";
+//            }
 
-            if(loginAttempts.isEmpty()) {
-                messageResponse = "data is empty";
-            }
+//            return new ResponseMessage().success("00", "success", 200, messageResponse, loginAttempts);
+            return new ResponseMessage().success("00", "success", 200, "success", "");
 
-            return new ResponseMessage().success("00", "success", 200, messageResponse, loginAttempts);
 
         } catch (Exception e) {
             System.out.println("Exception e");
