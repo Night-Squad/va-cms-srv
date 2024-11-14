@@ -1,11 +1,8 @@
 package com.va.corporate.srv.service;
 
-import com.va.corporate.srv.domain.LoginAttempDomain;
-import com.va.corporate.srv.repository.LoginAttemptRepository;
+import com.va.corporate.srv.repository.vacms.LoginAttemptRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.List;
 
 @Service
 @Transactional(readOnly = true)
