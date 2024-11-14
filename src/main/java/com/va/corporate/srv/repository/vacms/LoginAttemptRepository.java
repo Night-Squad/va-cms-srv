@@ -1,4 +1,4 @@
-package com.va.corporate.srv.repository;
+package com.va.corporate.srv.repository.vacms;
 
 import com.va.corporate.srv.domain.LoginAttempDomain;
 import org.springframework.jdbc.core.simple.JdbcClient;

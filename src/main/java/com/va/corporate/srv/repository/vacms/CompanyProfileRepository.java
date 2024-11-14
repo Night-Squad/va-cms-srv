@@ -1,7 +1,8 @@
-package com.va.corporate.srv.repository;
+package com.va.corporate.srv.repository.vacms;
 
 import com.va.corporate.srv.helper.NamingUtils;
-import com.va.corporate.srv.models.CompanyProfileModel;
+import com.va.corporate.srv.models.vacms.CompanyProfileModel;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -20,8 +21,8 @@ public class CompanyProfileRepository {
     private static final String INSERT = "INSERT INTO company_profile (main_color_pallete, second_color_pallete, third_color_pallete, company_logo, company_fav_icon, info_color, error_color, created_at, created_by, is_active, company_id) VALUES (, :main_color_pallete, :second_color_pallete, :third_color_pallete, :company_logo, :company_fav_icon, :info_color, :error_color, :created_at, :created_by, :is_active, :company_id)";
     private final JdbcTemplate jdbcTemplate;
 
-    public CompanyProfileRepository(JdbcTemplate jdbcTemplate) {
-        this.jdbcTemplate = jdbcTemplate;
+    public CompanyProfileRepository(@Qualifier("vacmsJdbcTemplate") JdbcTemplate vacmsJdbcTemplate) {
+        this.jdbcTemplate = vacmsJdbcTemplate;
     }
 
     public void addCompanyProfile(CompanyProfileModel companyProfileModel) {

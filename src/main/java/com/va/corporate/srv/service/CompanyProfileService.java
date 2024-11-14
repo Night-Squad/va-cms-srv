@@ -2,9 +2,8 @@ package com.va.corporate.srv.service;
 
 
 import com.va.corporate.srv.controller.dto.PaginatedResponseDto;
-import com.va.corporate.srv.domain.CompanyProfileDomain;
-import com.va.corporate.srv.models.CompanyProfileModel;
-import com.va.corporate.srv.repository.CompanyProfileRepository;
+import com.va.corporate.srv.models.vacms.CompanyProfileModel;
+import com.va.corporate.srv.repository.vacms.CompanyProfileRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;

@@ -8,29 +8,29 @@ spring:
   application:
     name: va-corporate-srv
   datasource:
-    url: jdbc:postgresql://91.108.104.69:5433/va_cms?prepareThreshold=0
-    driver-class-name: org.postgresql.Driver
-    username: postgres
-    password: ak4r01092023#@
-    hikari.connectionTimeout: 100000
-    hikari.idleTimeout: 600000
-    hikari.maxLifetime: 1800000
-#    va-cms:
-#      url: jdbc:postgresql://91.108.104.69:5433/va_cms?prepareThreshold=0
-#      driver-class-name: org.postgresql.Driver
-#      username: postgres
-#      password: ak4r01092023#@
-#      hikari.connectionTimeout: 100000
-#      hikari.idleTimeout: 600000
-#      hikari.maxLifetime: 1800000
-#    va-v2:
-#      url: jdbc:postgresql://91.108.104.69:5433/va_v2?prepareThreshold=0
-#      driver-class-name: org.postgresql.Driver
-#      username: postgres
-#      password: ak4r01092023#@
-#      hikari.connectionTimeout: 100000
-#      hikari.idleTimeout: 600000
-#      hikari.maxLifetime: 1800000
+#    url: jdbc:postgresql://91.108.104.69:5433/va_cms?prepareThreshold=0
+#    driver-class-name: org.postgresql.Driver
+#    username: postgres
+#    password: ak4r01092023#@
+#    hikari.connectionTimeout: 100000
+#    hikari.idleTimeout: 600000
+#    hikari.maxLifetime: 1800000
+    va-cms:
+      url: jdbc:postgresql://91.108.104.69:5433/va_cms?prepareThreshold=0
+      driver-class-name: org.postgresql.Driver
+      username: postgres
+      password: ak4r01092023#@
+      hikari.connectionTimeout: 100000
+      hikari.idleTimeout: 600000
+      hikari.maxLifetime: 1800000
+    va-v2:
+      url: jdbc:postgresql://91.108.104.69:5433/va_v2?prepareThreshold=0
+      driver-class-name: org.postgresql.Driver
+      username: postgres
+      password: ak4r01092023#@
+      hikari.connectionTimeout: 100000
+      hikari.idleTimeout: 600000
+      hikari.maxLifetime: 1800000
 
   liquibase:
     enabled: true
