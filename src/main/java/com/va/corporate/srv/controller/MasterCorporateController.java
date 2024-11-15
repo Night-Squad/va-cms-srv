@@ -80,7 +80,7 @@ public class MasterCorporateController {
     public Map<String, Object> updateData(@Valid @RequestBody MasterCorporateModel masterCorporateModel, @PathVariable Long id) {
         try{
 
-            System.out.println("Master Corporation : add");
+            System.out.println("Master Corporation : update");
             System.out.println("Time : " + LocalDateTime.now());
             System.out.println("Request body: "+masterCorporateModel.toString());
             System.out.println("Id: "+id);
@@ -103,7 +103,7 @@ public class MasterCorporateController {
     public Map<String, Object> deleteData(@PathVariable Long id) {
         try{
 
-            System.out.println("Master Corporation : add");
+            System.out.println("Master Corporation : delete");
             System.out.println("Time : " + LocalDateTime.now());
             System.out.println("Id: "+id);
 
