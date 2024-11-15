@@ -23,6 +23,7 @@ public class MasterCorporateRepository {
     private static String FINDALL_FILTER = "SELECT * FROM master_corporation WHERE corporate_name ILIKE ? LIMIT ? OFFSET ?";
 
     private static final String COUNTALL = "SELECT COUNT(*) FROM master_corporation";
+    private static final String UPDATE = "UPDATE master_corporation SET corporate_name = ? WHERE id = ?";
 
 
     private final JdbcTemplate jdbcTemplate;
@@ -78,5 +79,9 @@ public class MasterCorporateRepository {
 
         // Execute the SQL statement with the collected values
         jdbcTemplate.update(sql, columnValues.values().toArray());
+    }
+
+    public void updateMasterCorporation(MasterCorporateModel masterCorporation){
+        jdbcTemplate.update(UPDATE, masterCorporation.getCorporateName(), masterCorporation.getId());
     }
 }

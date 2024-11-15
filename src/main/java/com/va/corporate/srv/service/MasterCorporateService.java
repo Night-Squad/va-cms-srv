@@ -52,4 +52,15 @@ public class MasterCorporateService {
         }
     }
 
+    public void updateMasterCorporation(@Valid MasterCorporateModel masterCorporateModel, Long id) {
+        try {
+            masterCorporateModel.setUpdatedAt(LocalDateTime.now());
+            masterCorporateModel.setUpdatedBy("system");
+            masterCorporateModel.setId(id);
+            this.repository.updateMasterCorporation(masterCorporateModel);
+        } catch (Exception e) {
+            System.out.println("Error : "+e.getLocalizedMessage());
+        }
+    }
+
 }
