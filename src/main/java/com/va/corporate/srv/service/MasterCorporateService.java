@@ -63,4 +63,8 @@ public class MasterCorporateService {
         }
     }
 
+    public void deleteMasterCorporation(Long id) {
+        this.repository.deleteMasterCorporation(id);
+    }
+
 }

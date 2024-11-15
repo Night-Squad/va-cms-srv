@@ -87,7 +87,29 @@ public class MasterCorporateController {
 
             corporateService.updateMasterCorporation(masterCorporateModel, id);
 
-            return new ResponseMessage().success("00", "success", 200, "Success added.", masterCorporateModel);
+            return new ResponseMessage().success("00", "success", 200, "Success updated.", masterCorporateModel);
+        } catch (Exception e) {
+            System.out.println("Exception e : "+e.getMessage());
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Operation(summary = "Delete data of master_corporation")
+    @ApiResponse(responseCode = "201")
+    @ApiResponse(responseCode = "401", content = @Content(schema = @Schema(implementation = ApiErrorResponseDto.class)))
+    @ApiResponse(responseCode = "409", content = @Content(schema = @Schema(implementation = ApiErrorResponseDto.class)))
+    @ApiResponse(responseCode = "500", content = @Content(schema = @Schema(implementation = ApiErrorResponseDto.class)))
+    @PutMapping("/delete/{id}")
+    public Map<String, Object> deleteData(@PathVariable Long id) {
+        try{
+
+            System.out.println("Master Corporation : add");
+            System.out.println("Time : " + LocalDateTime.now());
+            System.out.println("Id: "+id);
+
+            corporateService.deleteMasterCorporation(id);
+
+            return new ResponseMessage().success("00", "success", 200, "Success deleted.", id);
         } catch (Exception e) {
             System.out.println("Exception e : "+e.getMessage());
             throw new RuntimeException(e);

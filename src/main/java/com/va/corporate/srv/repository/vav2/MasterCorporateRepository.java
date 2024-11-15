@@ -24,6 +24,7 @@ public class MasterCorporateRepository {
 
     private static final String COUNTALL = "SELECT COUNT(*) FROM master_corporation";
     private static final String UPDATE = "UPDATE master_corporation SET corporate_name = ? WHERE id = ?";
+    private static final String UPDATE_IS_ACTIVE = "UPDATE master_corporation SET is_active = false WHERE id = ?";
 
 
     private final JdbcTemplate jdbcTemplate;
@@ -83,5 +84,9 @@ public class MasterCorporateRepository {
 
     public void updateMasterCorporation(MasterCorporateModel masterCorporation){
         jdbcTemplate.update(UPDATE, masterCorporation.getCorporateName(), masterCorporation.getId());
+    }
+
+    public void deleteMasterCorporation(Long id){
+        jdbcTemplate.update(UPDATE_IS_ACTIVE, id);
     }
 }
