@@ -45,7 +45,7 @@ public class MasterCorporateService {
         try {
             masterCorporateModel.setCreatedAt(LocalDateTime.now());
             masterCorporateModel.setCreatedBy("system");
-            masterCorporateModel.setActive(true);
+            masterCorporateModel.setIsActive(true);
             this.repository.addMasterCorporation(masterCorporateModel);
         } catch (Exception e) {
             System.out.println("Error : "+e.getLocalizedMessage());
