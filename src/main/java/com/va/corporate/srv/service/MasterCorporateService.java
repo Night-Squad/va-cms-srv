@@ -41,7 +41,7 @@ public class MasterCorporateService {
             intColumn.add("id");
 
             // specify valid columns
-            List<String> validColumns = Arrays.asList("corporate_name", "created_by", "updated_by", "id");
+            List<String> validColumns = Arrays.asList("corporate_name", "created_by", "updated_by", "id", "start_date", "end_date");
 
             totalItems = repository.countAll(searching, intColumn, validColumns);
             totalPages = (int) Math.ceil((double) totalItems / size);

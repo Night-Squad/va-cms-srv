@@ -9,6 +9,7 @@ import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -46,7 +47,7 @@ public class MasterCorporateRepository {
         params.add(size);
         params.add(offset);
 
-        // System.out.println("sql : "+sql.toString());
+        System.out.println("sql : "+sql.toString());
 
         return jdbcTemplate.query(sql.toString(), params.toArray(),
                 new BeanPropertyRowMapper<>(MasterCorporateModel.class));
@@ -57,13 +58,34 @@ public class MasterCorporateRepository {
         List<Object> params = new ArrayList<>();
 
         searching.forEach((key, value) -> {
+
             if (validColumns.contains(key) && value != null && !value.trim().isEmpty()) {
 
                 if (intColumn.contains(key)) {
-                    // int value
+                    // int column value
                     sql.append(" AND ").append(key).append(" = ?");
                     Integer intValue = Integer.valueOf(value);
                     params.add(intValue);
+
+                } else if(key.equals("start_date") || key.equals("end_date")) {
+                    // date range column
+                    // check if one of starting_date or end_of_date null or empty string, give validation
+                    if(value.isEmpty()) {
+                        System.out.println("key : "+key+" has value null or empty string - "+value);
+                    }
+
+                    if(key.equals("start_date")) {
+                        System.out.println("contains start_date");
+                        sql.append(" AND ").append("created_at").append(" >= ?");
+                        params.add(Timestamp.valueOf(value+" 00:00:00"));
+                    }
+
+                    if(key.equals("end_date")) {
+                        System.out.println("contains end_date");
+                        sql.append(" AND ").append("created_at").append(" <= ?");
+                        params.add(Timestamp.valueOf(value+" 23:59:59"));
+                    }
+
 
                 } else {
                     // string value
