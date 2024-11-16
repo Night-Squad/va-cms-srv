@@ -23,7 +23,6 @@ public class MasterCorporateRepository {
     private static final String FINDALL = "SELECT * FROM master_corporation WHERE 1=1";
 
     private static final String COUNTALL = "SELECT COUNT(*) FROM master_corporation WHERE 1=1";
-    private static String FINDALL_FILTER = "SELECT * FROM master_corporation WHERE corporate_name ILIKE ? LIMIT ? OFFSET ?";
     private static final String UPDATE = "UPDATE master_corporation SET corporate_name = ? WHERE id = ?";
     private static final String UPDATE_IS_ACTIVE = "UPDATE master_corporation SET is_active = false WHERE id = ?";
 
@@ -53,15 +52,6 @@ public class MasterCorporateRepository {
                 new BeanPropertyRowMapper<>(MasterCorporateModel.class));
     }
 
-    public List<MasterCorporateModel> findAll(int page, int size, String corporateName) {
-        int offset = (page - 1) * size;
-        if(StringUtils.isNotBlank(corporateName)) {
-            return jdbcTemplate.query(FINDALL_FILTER, new Object[]{"%"+corporateName+"%", size, offset},
-                    new BeanPropertyRowMapper<>(MasterCorporateModel.class));
-        }
-        return jdbcTemplate.query(FINDALL, new Object[]{size, offset},
-                new BeanPropertyRowMapper<>(MasterCorporateModel.class));
-    }
 
     private List<Object> buildSearchParams(Map<String, String> searching, StringBuilder sql, List<String> intColumn, List<String> validColumns) {
         List<Object> params = new ArrayList<>();
@@ -77,10 +67,9 @@ public class MasterCorporateRepository {
 
                 } else {
                     // string value
-                    sql.append(" AND ").append(key).append(" LIKE ?");
+                    sql.append(" AND ").append(key).append(" ILIKE ?");
                     params.add("%" + value + "%");
                 }
-
 
             }
         });
