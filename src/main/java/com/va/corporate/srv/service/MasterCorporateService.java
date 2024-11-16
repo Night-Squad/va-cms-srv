@@ -7,7 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 @Validated
@@ -20,7 +23,9 @@ public class MasterCorporateService {
         this.repository = repository;
     }
 
-    public PaginatedResponseDto<MasterCorporateModel> getPaginatedMasterCorporate(int page, int size) {
+    public PaginatedResponseDto<MasterCorporateModel> getPaginatedMasterCorporate(int page, int size, Map<String, String> searching) {
+
+        System.out.println("Searching value : "+searching);
 
         List<MasterCorporateModel> masterCorporates = null;
 
@@ -28,10 +33,15 @@ public class MasterCorporateService {
         int totalPages = 0;
 
         try {
-            totalItems = repository.countAll();
+
+            // specify int column by adding intColumn
+            List<String> intColumn = new ArrayList<>();
+            intColumn.add("id");
+
+            totalItems = repository.countAll(searching, intColumn);
             totalPages = (int) Math.ceil((double) totalItems / size);
 
-            masterCorporates = repository.findAll(page, size);
+            masterCorporates = repository.findAll(page, size, searching, intColumn);
         } catch (Exception e) {
             System.out.println("Error : "+e.getLocalizedMessage());
         }

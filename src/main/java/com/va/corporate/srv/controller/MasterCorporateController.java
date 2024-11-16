@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.HashMap;
 import java.util.Map;
 
 @RestController
@@ -32,11 +33,15 @@ public class MasterCorporateController {
     @ApiResponse(responseCode = "409", content = @Content(schema = @Schema(implementation = ApiErrorResponseDto.class)))
     @ApiResponse(responseCode = "500", content = @Content(schema = @Schema(implementation = ApiErrorResponseDto.class)))
     @GetMapping("/find-all")
-    public Map<String, Object> findAll(@RequestParam(defaultValue =  "1") int page, @RequestParam(defaultValue = "10") int size) {
+    public Map<String, Object> findAll(@RequestParam(defaultValue =  "1") int page, @RequestParam(defaultValue = "10") int size, @RequestParam Map<String, String> allParams) {
         try{
             System.out.println("Corporate : find-all");
+            System.out.println("Search Parameters: " + allParams);
 
-            PaginatedResponseDto<MasterCorporateModel> corporates = corporateService.getPaginatedMasterCorporate(page, size);
+            // Extract search parameters
+            Map<String, String> searchParams = new HashMap<>(allParams);
+
+            PaginatedResponseDto<MasterCorporateModel> corporates = corporateService.getPaginatedMasterCorporate(page, size, searchParams);
 
             if(corporates.getRows() == null) {
                 return new ResponseMessage().success("00", "success", 200, "success to obtain data, content is empty", corporates);
