@@ -8,7 +8,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 
 import java.util.ArrayList;
-import java.util.HashMap;
+import javax.validation.Valid;
+import java.time.LocalDateTime;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -38,14 +40,45 @@ public class MasterCorporateService {
             List<String> intColumn = new ArrayList<>();
             intColumn.add("id");
 
-            totalItems = repository.countAll(searching, intColumn);
+            // specify valid columns
+            List<String> validColumns = Arrays.asList("corporate_name", "created_by", "updated_by", "id");
+
+            totalItems = repository.countAll(searching, intColumn, validColumns);
             totalPages = (int) Math.ceil((double) totalItems / size);
 
-            masterCorporates = repository.findAll(page, size, searching, intColumn);
+            masterCorporates = repository.findAllQueryDynamic(page, size, searching, intColumn, validColumns);
+
         } catch (Exception e) {
             System.out.println("Error : "+e.getLocalizedMessage());
         }
 
         return new PaginatedResponseDto<>(masterCorporates, page, totalPages, totalItems);
     }
+
+    public void addMasterCorporation(@Valid MasterCorporateModel masterCorporateModel) {
+        try {
+            masterCorporateModel.setCreatedAt(LocalDateTime.now());
+            masterCorporateModel.setCreatedBy("system");
+            masterCorporateModel.setIsActive(true);
+            this.repository.addMasterCorporation(masterCorporateModel);
+        } catch (Exception e) {
+            System.out.println("Error : "+e.getLocalizedMessage());
+        }
+    }
+
+    public void updateMasterCorporation(@Valid MasterCorporateModel masterCorporateModel, Long id) {
+        try {
+            masterCorporateModel.setUpdatedAt(LocalDateTime.now());
+            masterCorporateModel.setUpdatedBy("system");
+            masterCorporateModel.setId(id);
+            this.repository.updateMasterCorporation(masterCorporateModel);
+        } catch (Exception e) {
+            System.out.println("Error : "+e.getLocalizedMessage());
+        }
+    }
+
+    public void deleteMasterCorporation(Long id) {
+        this.repository.deleteMasterCorporation(id);
+    }
+
 }

@@ -12,12 +12,11 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
+import javax.validation.Valid;
+import java.time.LocalDateTime;
 import java.util.Map;
 
 @RestController
@@ -48,6 +47,73 @@ public class MasterCorporateController {
             }
 
             return new ResponseMessage().success("00", "success", 200, "data fetch successfully", corporates);
+        } catch (Exception e) {
+            System.out.println("Exception e : "+e.getMessage());
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Operation(summary = "Add data of master_corporation")
+    @ApiResponse(responseCode = "201")
+    @ApiResponse(responseCode = "401", content = @Content(schema = @Schema(implementation = ApiErrorResponseDto.class)))
+    @ApiResponse(responseCode = "409", content = @Content(schema = @Schema(implementation = ApiErrorResponseDto.class)))
+    @ApiResponse(responseCode = "500", content = @Content(schema = @Schema(implementation = ApiErrorResponseDto.class)))
+    @PostMapping("/add")
+    public Map<String, Object> addData(@Valid @RequestBody MasterCorporateModel masterCorporateModel) {
+        try{
+
+            System.out.println("Master Corporation : add");
+            System.out.println("Time : " + LocalDateTime.now());
+            System.out.println("Request body: "+masterCorporateModel.toString());
+
+            corporateService.addMasterCorporation(masterCorporateModel);
+
+            return new ResponseMessage().success("00", "success", 200, "Success added.", masterCorporateModel);
+        } catch (Exception e) {
+            System.out.println("Exception e : "+e.getMessage());
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Operation(summary = "Update data of master_corporation")
+    @ApiResponse(responseCode = "201")
+    @ApiResponse(responseCode = "401", content = @Content(schema = @Schema(implementation = ApiErrorResponseDto.class)))
+    @ApiResponse(responseCode = "409", content = @Content(schema = @Schema(implementation = ApiErrorResponseDto.class)))
+    @ApiResponse(responseCode = "500", content = @Content(schema = @Schema(implementation = ApiErrorResponseDto.class)))
+    @PutMapping("/edit/{id}")
+    public Map<String, Object> updateData(@Valid @RequestBody MasterCorporateModel masterCorporateModel, @PathVariable Long id) {
+        try{
+
+            System.out.println("Master Corporation : update");
+            System.out.println("Time : " + LocalDateTime.now());
+            System.out.println("Request body: "+masterCorporateModel.toString());
+            System.out.println("Id: "+id);
+
+            corporateService.updateMasterCorporation(masterCorporateModel, id);
+
+            return new ResponseMessage().success("00", "success", 200, "Success updated.", masterCorporateModel);
+        } catch (Exception e) {
+            System.out.println("Exception e : "+e.getMessage());
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Operation(summary = "Delete data of master_corporation")
+    @ApiResponse(responseCode = "201")
+    @ApiResponse(responseCode = "401", content = @Content(schema = @Schema(implementation = ApiErrorResponseDto.class)))
+    @ApiResponse(responseCode = "409", content = @Content(schema = @Schema(implementation = ApiErrorResponseDto.class)))
+    @ApiResponse(responseCode = "500", content = @Content(schema = @Schema(implementation = ApiErrorResponseDto.class)))
+    @PutMapping("/delete/{id}")
+    public Map<String, Object> deleteData(@PathVariable Long id) {
+        try{
+
+            System.out.println("Master Corporation : delete");
+            System.out.println("Time : " + LocalDateTime.now());
+            System.out.println("Id: "+id);
+
+            corporateService.deleteMasterCorporation(id);
+
+            return new ResponseMessage().success("00", "success", 200, "Success deleted.", id);
         } catch (Exception e) {
             System.out.println("Exception e : "+e.getMessage());
             throw new RuntimeException(e);
