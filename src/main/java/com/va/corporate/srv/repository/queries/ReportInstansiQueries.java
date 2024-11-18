@@ -117,5 +117,5 @@ public class ReportInstansiQueries {
                     select * FROM CTE WHERE RN = 1;
             """;
 
-    public static final String COUNTALL = "";
+    public static final String COUNTALL = "select COUNT(*) from (:all_query) report_instansi;";
 }
