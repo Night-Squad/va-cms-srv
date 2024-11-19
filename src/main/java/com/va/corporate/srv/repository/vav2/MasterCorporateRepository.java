@@ -3,6 +3,7 @@ package com.va.corporate.srv.repository.vav2;
 
 import com.va.corporate.srv.helper.NamingUtils;
 import com.va.corporate.srv.models.vav2.MasterCorporateModel;
+import com.va.corporate.srv.repository.queries.GeneralHandlerQuery;
 import io.micrometer.common.util.StringUtils;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
@@ -27,6 +28,8 @@ public class MasterCorporateRepository {
     private static final String UPDATE = "UPDATE master_corporation SET corporate_name = ? WHERE id = ?";
     private static final String UPDATE_IS_ACTIVE = "UPDATE master_corporation SET is_active = false WHERE id = ?";
 
+    private GeneralHandlerQuery generalHandlerQuery;
+
 
     private final JdbcTemplate jdbcTemplate;
 
@@ -40,7 +43,7 @@ public class MasterCorporateRepository {
         // Build dynamic SQL query
         StringBuilder sql = new StringBuilder(FINDALL);
         // System.out.println("sql before search param builder : "+sql.toString());
-        List<Object> params = this.buildSearchParams(searching, sql, intColumn, validColumns);
+        List<Object> params = generalHandlerQuery.buildSearchParams(searching, sql, intColumn, validColumns);
 
         // Add pagination
         sql.append(" LIMIT ? OFFSET ?");
@@ -54,55 +57,10 @@ public class MasterCorporateRepository {
     }
 
 
-    private List<Object> buildSearchParams(Map<String, String> searching, StringBuilder sql, List<String> intColumn, List<String> validColumns) {
-        List<Object> params = new ArrayList<>();
-
-        searching.forEach((key, value) -> {
-
-            if (validColumns.contains(key) && value != null && !value.trim().isEmpty()) {
-
-                if (intColumn.contains(key)) {
-                    // int column value
-                    sql.append(" AND ").append(key).append(" = ?");
-                    Integer intValue = Integer.valueOf(value);
-                    params.add(intValue);
-
-                } else if(key.equals("start_date") || key.equals("end_date")) {
-                    // date range column
-                    // check if one of starting_date or end_of_date null or empty string, give validation
-                    if(value.isEmpty()) {
-                        System.out.println("key : "+key+" has value null or empty string - "+value);
-                    }
-
-                    if(key.equals("start_date")) {
-                        System.out.println("contains start_date");
-                        sql.append(" AND ").append("created_at").append(" >= ?");
-                        params.add(Timestamp.valueOf(value+" 00:00:00"));
-                    }
-
-                    if(key.equals("end_date")) {
-                        System.out.println("contains end_date");
-                        sql.append(" AND ").append("created_at").append(" <= ?");
-                        params.add(Timestamp.valueOf(value+" 23:59:59"));
-                    }
-
-
-                } else {
-                    // string value
-                    sql.append(" AND ").append(key).append(" ILIKE ?");
-                    params.add("%" + value + "%");
-                }
-
-            }
-        });
-
-        return params;
-    }
-
     public int countAll(Map<String, String> searching, List<String> intColumn, List<String> validColumns) {
         // Build dynamic SQL query
         StringBuilder sql = new StringBuilder(COUNTALL);
-        List<Object> params = buildSearchParams(searching, sql, intColumn, validColumns);
+        List<Object> params = generalHandlerQuery.buildSearchParams(searching, sql, intColumn, validColumns);
 
         System.out.println("count all sql : "+sql.toString());
 

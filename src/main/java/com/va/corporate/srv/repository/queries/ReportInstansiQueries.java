@@ -2,7 +2,10 @@ package com.va.corporate.srv.repository.queries;
 
 public class ReportInstansiQueries {
 
-    public static final String FINDALL = """
+    public ReportInstansiQueries() {
+    }
+
+    public String FINDALL = """
             WITH CTE as
                         (
                         SELECT *,
@@ -114,8 +117,8 @@ public class ReportInstansiQueries {
                                 ) tbl_hasil
                             ) mst_tx
                         )
-                    select * FROM CTE WHERE RN = 1;
+                    select * FROM CTE WHERE RN = 1
             """;
 
-    public static final String COUNTALL = "select COUNT(*) from (:all_query) report_instansi;";
+    public String COUNTALL = "select COUNT(*) from (:all_query) report_instansi;";
 }
