@@ -5,7 +5,7 @@ public class ReportInstansiQueries {
     public ReportInstansiQueries() {
     }
 
-    public String FINDALL = """
+    public static final String FINDALL = """
             WITH CTE as
                         (
                         SELECT *,
@@ -120,5 +120,5 @@ public class ReportInstansiQueries {
                     select * FROM CTE WHERE RN = 1
             """;
 
-    public String COUNTALL = "select COUNT(*) from (:all_query) report_instansi;";
+    public static final String COUNTALL = "select COUNT(*) from (:all_query) report_instansi;";
 }
