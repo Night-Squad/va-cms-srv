@@ -25,7 +25,7 @@ public class MasterCorporateRepository {
     private static final String FINDALL = "SELECT * FROM master_corporation WHERE 1=1";
 
     private static final String COUNTALL = "SELECT COUNT(*) FROM master_corporation WHERE 1=1";
-    private static final String UPDATE = "UPDATE master_corporation SET corporate_name = ? WHERE id = ?";
+    private static final String UPDATE = "UPDATE master_corporation SET corporate_name = ?, is_active = ?, updated_at = ?, updated_by = ? WHERE id = ?";
     private static final String UPDATE_IS_ACTIVE = "UPDATE master_corporation SET is_active = false WHERE id = ?";
 
     private GeneralHandlerQuery generalHandlerQuery;
@@ -103,7 +103,12 @@ public class MasterCorporateRepository {
     }
 
     public void updateMasterCorporation(MasterCorporateModel masterCorporation){
-        jdbcTemplate.update(UPDATE, masterCorporation.getCorporateName(), masterCorporation.getId());
+        jdbcTemplate.update(UPDATE,
+                masterCorporation.getCorporateName(),
+                masterCorporation.getIsActive(),
+                masterCorporation.getUpdatedAt(),
+                masterCorporation.getUpdatedBy(),
+                masterCorporation.getId());
     }
 
     public void deleteMasterCorporation(Long id){
