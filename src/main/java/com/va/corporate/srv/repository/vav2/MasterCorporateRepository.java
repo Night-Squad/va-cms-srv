@@ -4,19 +4,15 @@ package com.va.corporate.srv.repository.vav2;
 import com.va.corporate.srv.helper.NamingUtils;
 import com.va.corporate.srv.models.vav2.MasterCorporateModel;
 import com.va.corporate.srv.repository.queries.GeneralHandlerQuery;
-import io.micrometer.common.util.StringUtils;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
-import java.sql.Timestamp;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
 import java.lang.reflect.Field;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.StringJoiner;
 
 @Repository
@@ -28,7 +24,7 @@ public class MasterCorporateRepository {
     private static final String UPDATE = "UPDATE master_corporation SET corporate_name = ?, is_active = ?, updated_at = ?, updated_by = ? WHERE id = ?";
     private static final String UPDATE_IS_ACTIVE = "UPDATE master_corporation SET is_active = false WHERE id = ?";
 
-    private GeneralHandlerQuery generalHandlerQuery;
+    private final GeneralHandlerQuery generalHandlerQuery = new GeneralHandlerQuery();
 
 
     private final JdbcTemplate jdbcTemplate;
