@@ -5,6 +5,7 @@ import com.va.corporate.srv.helper.NamingUtils;
 import com.va.corporate.srv.models.vav2.MasterCorporateModel;
 import com.va.corporate.srv.repository.queries.GeneralHandlerQuery;
 import io.micrometer.common.util.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -28,6 +29,7 @@ public class MasterCorporateRepository {
     private static final String UPDATE = "UPDATE master_corporation SET corporate_name = ? WHERE id = ?";
     private static final String UPDATE_IS_ACTIVE = "UPDATE master_corporation SET is_active = false WHERE id = ?";
 
+    @Autowired
     private GeneralHandlerQuery generalHandlerQuery;
 
 

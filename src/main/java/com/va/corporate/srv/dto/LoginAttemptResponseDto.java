@@ -1,4 +1,4 @@
-package com.va.corporate.srv.controller.dto;
+package com.va.corporate.srv.dto;
 
 import com.va.corporate.srv.domain.LoginAttempDomain;
 import io.swagger.v3.oas.annotations.media.Schema;

@@ -1,8 +1,9 @@
 package com.va.corporate.srv.service;
 
 
-import com.va.corporate.srv.controller.dto.PaginatedResponseDto;
+import com.va.corporate.srv.dto.PaginatedResponseDto;
 import com.va.corporate.srv.domain.ReportInstansiDomain;
+import com.va.corporate.srv.dto.ReportInsansiResponseDto;
 import com.va.corporate.srv.repository.ReportInstansiRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,11 +25,11 @@ public class ReportInstansiService {
         this.repository = repository;
     }
 
-    public PaginatedResponseDto<ReportInstansiDomain> getPaginationReportInstansi(int page, int size, Map<String, String> searching) {
+    public PaginatedResponseDto<ReportInsansiResponseDto> getPaginationReportInstansi(int page, int size, Map<String, String> searching) {
 
         System.out.println("Searching value : "+searching);
 
-        List<ReportInstansiDomain> reportInstansi = null;
+        List<ReportInsansiResponseDto> reportInstansi = null;
 
         int totalItems = 0;
         int totalPages = 0;
@@ -37,14 +38,18 @@ public class ReportInstansiService {
             // specify int column by adding intColumnn
             List<String> intColumn = new ArrayList<>();
             intColumn.add("id");
+            intColumn.add("corporate_id");
 
             // specify valid columns
-            List<String> validColumns = Arrays.asList("id","created_by");
+            List<String> validColumns = Arrays.asList("id","created_by", "start_date", "end_date", "corporate_id");
 
+
+            // data content
+            reportInstansi = repository.findAllQueryDynamic(page, size, searching, intColumn, validColumns);
+
+            // count all
             totalItems = repository.countAll(searching, intColumn, validColumns);
             totalPages = (int) Math.ceil((double) totalItems / size);
-
-            reportInstansi = repository.findAllQueryDynamic(page, size, searching, intColumn, validColumns);
 
 
         } catch (Exception e) {
