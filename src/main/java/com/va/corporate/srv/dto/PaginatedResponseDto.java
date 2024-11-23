@@ -1,4 +1,4 @@
-package com.va.corporate.srv.controller.dto;
+package com.va.corporate.srv.dto;
 
 import java.util.List;
 

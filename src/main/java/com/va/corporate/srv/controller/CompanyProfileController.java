@@ -1,7 +1,7 @@
 package com.va.corporate.srv.controller;
 
-import com.va.corporate.srv.controller.dto.ApiErrorResponseDto;
-import com.va.corporate.srv.controller.dto.PaginatedResponseDto;
+import com.va.corporate.srv.dto.ApiErrorResponseDto;
+import com.va.corporate.srv.dto.PaginatedResponseDto;
 import com.va.corporate.srv.controller.response.ResponseMessage;
 import com.va.corporate.srv.models.vacms.CompanyProfileModel;
 import com.va.corporate.srv.service.CompanyProfileService;

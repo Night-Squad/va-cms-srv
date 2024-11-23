@@ -1,6 +1,6 @@
 package com.va.corporate.srv.service;
 
-import com.va.corporate.srv.controller.dto.PaginatedResponseDto;
+import com.va.corporate.srv.dto.PaginatedResponseDto;
 import com.va.corporate.srv.models.vav2.MasterCorporateModel;
 import com.va.corporate.srv.repository.vav2.MasterCorporateRepository;
 import org.springframework.beans.factory.annotation.Autowired;

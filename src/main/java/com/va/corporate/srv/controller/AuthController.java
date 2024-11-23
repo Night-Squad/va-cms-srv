@@ -1,10 +1,10 @@
 package com.va.corporate.srv.controller;
 
-import com.va.corporate.srv.controller.dto.ApiErrorResponseDto;
+import com.va.corporate.srv.dto.ApiErrorResponseDto;
 import com.va.corporate.srv.controller.response.ResponseMessage;
 import com.va.corporate.srv.domain.LoginAttempDomain;
 import com.va.corporate.srv.service.LoginService;
-import com.va.corporate.srv.controller.dto.LoginAttemptResponseDto;
+import com.va.corporate.srv.dto.LoginAttemptResponseDto;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
