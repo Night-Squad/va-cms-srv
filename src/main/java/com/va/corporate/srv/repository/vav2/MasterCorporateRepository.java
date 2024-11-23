@@ -4,20 +4,16 @@ package com.va.corporate.srv.repository.vav2;
 import com.va.corporate.srv.helper.NamingUtils;
 import com.va.corporate.srv.models.vav2.MasterCorporateModel;
 import com.va.corporate.srv.repository.queries.GeneralHandlerQuery;
-import io.micrometer.common.util.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
-import java.sql.Timestamp;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
 import java.lang.reflect.Field;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.StringJoiner;
 
 @Repository
@@ -26,7 +22,7 @@ public class MasterCorporateRepository {
     private static final String FINDALL = "SELECT * FROM master_corporation WHERE 1=1";
 
     private static final String COUNTALL = "SELECT COUNT(*) FROM master_corporation WHERE 1=1";
-    private static final String UPDATE = "UPDATE master_corporation SET corporate_name = ? WHERE id = ?";
+    private static final String UPDATE = "UPDATE master_corporation SET corporate_name = ?, is_active = ?, updated_at = ?, updated_by = ? WHERE id = ?";
     private static final String UPDATE_IS_ACTIVE = "UPDATE master_corporation SET is_active = false WHERE id = ?";
 
     @Autowired
@@ -105,7 +101,12 @@ public class MasterCorporateRepository {
     }
 
     public void updateMasterCorporation(MasterCorporateModel masterCorporation){
-        jdbcTemplate.update(UPDATE, masterCorporation.getCorporateName(), masterCorporation.getId());
+        jdbcTemplate.update(UPDATE,
+                masterCorporation.getCorporateName(),
+                masterCorporation.getIsActive(),
+                masterCorporation.getUpdatedAt(),
+                masterCorporation.getUpdatedBy(),
+                masterCorporation.getId());
     }
 
     public void deleteMasterCorporation(Long id){
