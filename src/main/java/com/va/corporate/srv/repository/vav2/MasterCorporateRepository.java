@@ -4,11 +4,8 @@ package com.va.corporate.srv.repository.vav2;
 import com.va.corporate.srv.helper.NamingUtils;
 import com.va.corporate.srv.models.vav2.MasterCorporateModel;
 import com.va.corporate.srv.repository.queries.GeneralHandlerQuery;
-<<<<<<< HEAD
-=======
 import io.micrometer.common.util.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
->>>>>>> f69bb86 (fixing bug report instansi)
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
