@@ -10,7 +10,9 @@ import org.springframework.validation.annotation.Validated;
 
 import javax.validation.Valid;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @Service
 @Validated
@@ -24,16 +26,18 @@ public class CompanyProfileService {
         this.repository = repository;
     }
 
-    public PaginatedResponseDto<CompanyProfileModel> getPaginatedCompanyProfile(int page, int size) {
+    public PaginatedResponseDto<CompanyProfileModel> getPaginatedCompanyProfile(int page, int size, Map<String, String> searching) {
         List<CompanyProfileModel> companyProfiles = null;
+        System.out.println("Searching value : "+searching);
 
         int totalItems = 0;
         int totalPages = 0;
         try {
-            totalItems = repository.countAll();
+
+            totalItems = repository.countAll(searching);
             totalPages = (int) Math.ceil((double) totalItems / size);
 
-            companyProfiles = repository.findAll(page, size);
+            companyProfiles = repository.findAll(page, size, searching);
         } catch (Exception e) {
             System.out.println("Error : "+e.getLocalizedMessage());
         }
