@@ -34,7 +34,7 @@ public class MasterCorporateController {
     @GetMapping("/find-all")
     public Map<String, Object> findAll(@RequestParam(defaultValue =  "1") int page, @RequestParam(defaultValue = "10") int size, @RequestParam Map<String, String> allParams) {
         try{
-            System.out.println("Corporate : find-all");
+            System.out.println("Corporate : find-all ");
             System.out.println("Search Parameters: " + allParams);
 
             // Extract search parameters
