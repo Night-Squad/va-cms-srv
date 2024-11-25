@@ -176,11 +176,11 @@ public class CompanyProfileModel {
         this.updatedBy = updatedBy;
     }
 
-    public Boolean getActive() {
+    public Boolean getIsActive() {
         return isActive;
     }
 
-    public void setActive(Boolean is_active) {
+    public void setIsActive(Boolean is_active) {
         isActive = is_active;
     }
 
