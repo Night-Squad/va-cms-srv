@@ -7,6 +7,12 @@ server:
 spring:
   application:
     name: va-corporate-srv
+  servlet:
+    multipart:
+      enabled: true
+      maxFileSize: 300000
+      maxRequestSize: 300000
+      location: ${java.io.tmpdir}
   datasource:
 #    url: jdbc:postgresql://91.108.104.69:5433/va_cms?prepareThreshold=0
 #    driver-class-name: org.postgresql.Driver

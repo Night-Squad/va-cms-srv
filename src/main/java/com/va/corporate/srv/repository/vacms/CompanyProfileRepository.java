@@ -17,6 +17,7 @@ public class CompanyProfileRepository {
     private static final String COUNTALL = "SELECT COUNT(*) FROM company_profile WHERE 1=1";
     private static final String INSERT = "INSERT INTO company_profile (main_color_pallete, second_color_pallete, third_color_pallete, company_logo, company_fav_icon, info_color, error_color, created_at, created_by, is_active, company_id) VALUES (, :main_color_pallete, :second_color_pallete, :third_color_pallete, :company_logo, :company_fav_icon, :info_color, :error_color, :created_at, :created_by, :is_active, :company_id)";
     private static final String FIND_BY_COMPANY_ID = "SELECT * FROM company_profile WHERE company_id = ? and is_active = true ORDER BY id DESC LIMIT 1";
+    private static final String FIND_BY_ID = "SELECT * FROM company_profile WHERE id = ?";
     private final JdbcTemplate jdbcTemplate;
 
     public CompanyProfileRepository(@Qualifier("vacmsJdbcTemplate") JdbcTemplate vacmsJdbcTemplate) {
@@ -122,6 +123,11 @@ public class CompanyProfileRepository {
     public List<CompanyProfileModel> findByCompanyId(Integer companyId) {
         return jdbcTemplate.query(FIND_BY_COMPANY_ID, new Object[]{companyId},
                 new BeanPropertyRowMapper<>(CompanyProfileModel.class));
+    }
+
+    public CompanyProfileModel findById(Integer id) {
+        return jdbcTemplate.queryForObject(FIND_BY_ID, new BeanPropertyRowMapper<>(CompanyProfileModel.class),
+                id);
     }
 
     public int countAll(Map<String, String> searching) {
