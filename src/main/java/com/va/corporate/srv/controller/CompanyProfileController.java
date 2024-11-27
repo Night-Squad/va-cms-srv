@@ -14,6 +14,8 @@ import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.time.LocalDateTime;
+import java.util.HashMap;
 import java.util.Map;
 
 @RestController
@@ -33,8 +35,13 @@ public class CompanyProfileController {
         try{
             System.out.println("Company Profile : add");
             System.out.println("Request body: "+companyProfile.toString());
+            System.out.println("Timestamp : " + LocalDateTime.now());
 
-            companyProfileService.addCompanyProfile(companyProfile);
+            try {
+                companyProfileService.addCompanyProfile(companyProfile);
+            } catch (Exception e) {
+                return new ResponseMessage().success("99", "Error", 200, e.getMessage(), null);
+            }
 
             return new ResponseMessage().success("00", "success", 200, "Success added.", companyProfile);
         } catch (Exception e) {
@@ -50,17 +57,65 @@ public class CompanyProfileController {
     @ApiResponse(responseCode = "409", content = @Content(schema = @Schema(implementation = ApiErrorResponseDto.class)))
     @ApiResponse(responseCode = "500", content = @Content(schema = @Schema(implementation = ApiErrorResponseDto.class)))
     @GetMapping("/find-all")
-    public Map<String, Object> findAll(@RequestParam(defaultValue =  "1") int page, @RequestParam(defaultValue = "10") int size) {
+    public Map<String, Object> findAll(@RequestParam(defaultValue =  "1") int page, @RequestParam(defaultValue = "10") int size, @RequestParam Map<String, String> allParams) {
         try{
             System.out.println("Company Profile : find-all");
+            System.out.println("params: " + allParams.toString());
+            System.out.println("Timestamp : " + LocalDateTime.now());
 
-            PaginatedResponseDto<CompanyProfileModel> companyProfiles = companyProfileService.getPaginatedCompanyProfile(page, size);
+            // Extract search parameters
+            Map<String, String> searchParams = new HashMap<>(allParams);
+
+            PaginatedResponseDto<CompanyProfileModel> companyProfiles = companyProfileService.getPaginatedCompanyProfile(page, size, searchParams);
 
             if(companyProfiles.getRows().isEmpty()) {
                 return new ResponseMessage().success("00", "success", 200, "success to obtain data, content is empty", companyProfiles);
             }
 
             return new ResponseMessage().success("00", "success", 200, "data fetch successfully", companyProfiles);
+        } catch (Exception e) {
+            System.out.println("Exception e : "+e.getMessage());
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Operation(summary = "Edit data of company_profiles")
+    @ApiResponse(responseCode = "201")
+    @ApiResponse(responseCode = "401", content = @Content(schema = @Schema(implementation = ApiErrorResponseDto.class)))
+    @ApiResponse(responseCode = "409", content = @Content(schema = @Schema(implementation = ApiErrorResponseDto.class)))
+    @ApiResponse(responseCode = "500", content = @Content(schema = @Schema(implementation = ApiErrorResponseDto.class)))
+    @PutMapping("/edit")
+    public Map<String, Object> editData(@Valid @RequestBody CompanyProfileModel companyProfile) {
+        try{
+            System.out.println("Company Profile : edit");
+            System.out.println("Request body: "+companyProfile.toString());
+            System.out.println("Timestamp : " + LocalDateTime.now());
+
+            companyProfileService.updateCompanyProfile(companyProfile);
+
+            return new ResponseMessage().success("00", "success", 200, "Success edited.", companyProfile);
+        } catch (Exception e) {
+            System.out.println("Exception e : "+e.getMessage());
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Operation(summary = "Delete data of company_profiles")
+    @ApiResponse(responseCode = "201")
+    @ApiResponse(responseCode = "401", content = @Content(schema = @Schema(implementation = ApiErrorResponseDto.class)))
+    @ApiResponse(responseCode = "409", content = @Content(schema = @Schema(implementation = ApiErrorResponseDto.class)))
+    @ApiResponse(responseCode = "500", content = @Content(schema = @Schema(implementation = ApiErrorResponseDto.class)))
+    @DeleteMapping("/delete")
+    @ResponseBody
+    public Map<String, Object> deleteData(@Valid @RequestBody CompanyProfileModel companyProfile) {
+        try{
+            System.out.println("Company Profile : delete");
+            System.out.println("Request body: "+companyProfile.toString());
+            System.out.println("Timestamp : " + LocalDateTime.now());
+
+            companyProfileService.deleteCompanyProfile(companyProfile);
+
+            return new ResponseMessage().success("00", "success", 200, "Success deleted.", companyProfile);
         } catch (Exception e) {
             System.out.println("Exception e : "+e.getMessage());
             throw new RuntimeException(e);

@@ -10,7 +10,9 @@ import org.springframework.validation.annotation.Validated;
 
 import javax.validation.Valid;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @Service
 @Validated
@@ -24,16 +26,18 @@ public class CompanyProfileService {
         this.repository = repository;
     }
 
-    public PaginatedResponseDto<CompanyProfileModel> getPaginatedCompanyProfile(int page, int size) {
+    public PaginatedResponseDto<CompanyProfileModel> getPaginatedCompanyProfile(int page, int size, Map<String, String> searching) {
         List<CompanyProfileModel> companyProfiles = null;
+        System.out.println("Searching value : "+searching);
 
         int totalItems = 0;
         int totalPages = 0;
         try {
-            totalItems = repository.countAll();
+
+            totalItems = repository.countAll(searching);
             totalPages = (int) Math.ceil((double) totalItems / size);
 
-            companyProfiles = repository.findAll(page, size);
+            companyProfiles = repository.findAll(page, size, searching);
         } catch (Exception e) {
             System.out.println("Error : "+e.getLocalizedMessage());
         }
@@ -42,12 +46,42 @@ public class CompanyProfileService {
 
     }
 
-    public void addCompanyProfile(@Valid CompanyProfileModel companyProfile) {
+    public void addCompanyProfile(@Valid CompanyProfileModel companyProfile) throws Exception {
         try {
+            //validate if no active profile exist
+            List<CompanyProfileModel> companyProfileModels = this.repository.findByCompanyId(companyProfile.getCompanyId());
+            if(companyProfileModels != null && !companyProfileModels.isEmpty()) {
+                throw new Exception(String.format("row id %s masih aktif, data tidak dapat ditambah, silahkan check kembali", companyProfileModels.get(0).getId()));
+            }
+
             companyProfile.setCreatedAt(LocalDateTime.now());
+            companyProfile.setCreatedBy("system");
             this.repository.addCompanyProfile(companyProfile);
         } catch (Exception e) {
             System.out.println("Error : "+e.getLocalizedMessage());
+            throw e;
+        }
+    }
+
+    public void updateCompanyProfile(@Valid CompanyProfileModel companyProfile) throws Exception {
+        try {
+            companyProfile.setUpdatedAt(LocalDateTime.now());
+            companyProfile.setUpdatedBy("system");
+            this.repository.updateCompanyProfile(companyProfile);
+        } catch (Exception e) {
+            System.out.println("Error : "+e.getLocalizedMessage());
+            throw e;
+        }
+    }
+
+    public void deleteCompanyProfile(@Valid CompanyProfileModel companyProfile) throws Exception {
+        try {
+            companyProfile.setUpdatedAt(LocalDateTime.now());
+            companyProfile.setUpdatedBy("system");
+            this.repository.updateCompanyProfile(companyProfile);
+        } catch (Exception e) {
+            System.out.println("Error : "+e.getLocalizedMessage());
+            throw e;
         }
     }
 }
