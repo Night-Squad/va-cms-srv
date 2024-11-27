@@ -12,6 +12,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
 import java.time.LocalDateTime;
@@ -119,6 +120,25 @@ public class CompanyProfileController {
         } catch (Exception e) {
             System.out.println("Exception e : "+e.getMessage());
             throw new RuntimeException(e);
+        }
+    }
+
+    @Operation(summary = "Upload company logo")
+    @ApiResponse(responseCode = "201")
+    @ApiResponse(responseCode = "401", content = @Content(schema = @Schema(implementation = ApiErrorResponseDto.class)))
+    @ApiResponse(responseCode = "409", content = @Content(schema = @Schema(implementation = ApiErrorResponseDto.class)))
+    @ApiResponse(responseCode = "500", content = @Content(schema = @Schema(implementation = ApiErrorResponseDto.class)))
+    @PostMapping("/upload-logo")
+    public Map<String, Object> uploadLogo(@RequestParam("file") MultipartFile file, @RequestParam("id") String id) {
+        try {
+            System.out.println("Company Profile : upload logo");
+            System.out.println("Request: "+file.getOriginalFilename()+" id : "+id);
+            System.out.println("Timestamp : " + LocalDateTime.now());
+            companyProfileService.uploadLogo(file, id);
+            return new ResponseMessage().success("00", "success", 200, "Success uploaded.", null);
+        } catch (Exception e) {
+            System.out.println("Exception e : "+e.getMessage());
+            return new ResponseMessage().success("99", "error", 500, "Failed to upload image.", null);
         }
     }
 }
