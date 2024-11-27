@@ -2,6 +2,7 @@ package com.va.corporate.srv.service;
 
 
 import com.va.corporate.srv.dto.PaginatedResponseDto;
+import com.va.corporate.srv.dto.PaginatedSummaryDto;
 import com.va.corporate.srv.models.vacms.CompanyProfileModel;
 import com.va.corporate.srv.repository.vacms.CompanyProfileRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,7 +47,7 @@ public class CompanyProfileService {
             System.out.println("Error : "+e.getLocalizedMessage());
         }
 
-        return new PaginatedResponseDto<>(companyProfiles, page, totalPages, totalItems);
+        return new PaginatedResponseDto<>(companyProfiles, page, totalPages, totalItems, size);
 
     }
 

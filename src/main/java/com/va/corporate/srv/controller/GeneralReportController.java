@@ -4,8 +4,8 @@ package com.va.corporate.srv.controller;
 import com.va.corporate.srv.dto.ApiErrorResponseDto;
 import com.va.corporate.srv.dto.PaginatedResponseDto;
 import com.va.corporate.srv.controller.response.ResponseMessage;
-import com.va.corporate.srv.domain.ReportInstansiDomain;
-import com.va.corporate.srv.dto.ReportInsansiResponseDto;
+import com.va.corporate.srv.dto.PaginatedResponseReportDto;
+import com.va.corporate.srv.dto.ReportInsansiDataResponseDto;
 import com.va.corporate.srv.service.ReportInstansiService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -43,13 +43,13 @@ public class GeneralReportController {
             // Extract search parameters
             Map<String, String> searchParams = new HashMap<>(allParams);
 
-            PaginatedResponseDto<ReportInsansiResponseDto> reportInansi = reportInstansiService.getPaginationReportInstansi(page, size, searchParams);
+            PaginatedResponseReportDto<ReportInsansiDataResponseDto> reportInstansi = reportInstansiService.getPaginationReportInstansi(page, size, searchParams);
 
-            if(reportInansi.getRows() == null) {
-                return new ResponseMessage().success("00", "success", 200, "success to obtain data, content is empty", reportInansi);
+            if(reportInstansi.getRows() == null) {
+                return new ResponseMessage().success("00", "success", 200, "success to obtain data, content is empty", reportInstansi);
             }
 
-            return new ResponseMessage().success("00", "success", 200, "data fetch successfully", reportInansi);
+            return new ResponseMessage().success("00", "success", 200, "data fetch successfully", reportInstansi);
 
 
         } catch (Exception e) {

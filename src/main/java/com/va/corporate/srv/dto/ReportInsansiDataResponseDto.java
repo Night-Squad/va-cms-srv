@@ -1,6 +1,6 @@
 package com.va.corporate.srv.dto;
 
-public class ReportInsansiResponseDto {
+public class ReportInsansiDataResponseDto {
     private String va_acc_no_name;
     private String va_acc_no;
     private String created_at;
@@ -10,12 +10,12 @@ public class ReportInsansiResponseDto {
     private String credit;
     private String last_os;
     private String saldo_awal;
-    private String saldi_akhir;
+    private String saldo_akhir;
     private String company_name;
     private String rekinduk;
     private String corporate_name;
 
-    public ReportInsansiResponseDto() {
+    public ReportInsansiDataResponseDto() {
     }
 
     public String getVa_acc_no_name() {
@@ -90,12 +90,12 @@ public class ReportInsansiResponseDto {
         this.saldo_awal = saldo_awal;
     }
 
-    public String getSaldi_akhir() {
-        return saldi_akhir;
+    public String getSaldo_akhir() {
+        return saldo_akhir;
     }
 
-    public void setSaldi_akhir(String saldi_akhir) {
-        this.saldi_akhir = saldi_akhir;
+    public void setSaldo_akhir(String saldo_akhir) {
+        this.saldo_akhir = saldo_akhir;
     }
 
     public String getCompany_name() {
@@ -134,7 +134,7 @@ public class ReportInsansiResponseDto {
                 ", credit='" + credit + '\'' +
                 ", last_os='" + last_os + '\'' +
                 ", saldo_awal='" + saldo_awal + '\'' +
-                ", saldi_akhir='" + saldi_akhir + '\'' +
+                ", saldi_akhir='" + saldo_akhir + '\'' +
                 ", company_name='" + company_name + '\'' +
                 ", rekinduk='" + rekinduk + '\'' +
                 ", corporate_name='" + corporate_name + '\'' +

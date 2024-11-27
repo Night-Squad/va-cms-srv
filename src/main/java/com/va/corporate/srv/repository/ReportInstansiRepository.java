@@ -1,6 +1,5 @@
 package com.va.corporate.srv.repository;
-import com.va.corporate.srv.domain.ReportInstansiDomain;
-import com.va.corporate.srv.dto.ReportInsansiResponseDto;
+import com.va.corporate.srv.dto.ReportInsansiDataResponseDto;
 import com.va.corporate.srv.repository.queries.GeneralHandlerQuery;
 import com.va.corporate.srv.repository.queries.ReportInstansiQueries;
 
@@ -29,7 +28,7 @@ public class ReportInstansiRepository {
         this.jdbcTemplate = vav2JdbcTemplate;
     }
 
-    public List<ReportInsansiResponseDto> findAllQueryDynamic(int page, int size, Map<String, String> searching, List<String> intColumn, List<String> validColumns) {
+    public List<ReportInsansiDataResponseDto> findAllQueryDynamic(int page, int size, Map<String, String> searching, List<String> intColumn, List<String> validColumns) {
         System.out.println("findAllQueryDynamic ===>");
         int offset = (page - 1) * size;
 
@@ -55,7 +54,7 @@ public class ReportInstansiRepository {
         System.out.println("sql : "+sql);
         System.out.println("Named Parameters: " + params);
 
-        return jdbcTemplate.query(sql.toString(), params.toArray(), new BeanPropertyRowMapper<>(ReportInsansiResponseDto.class));
+        return jdbcTemplate.query(sql.toString(), params.toArray(), new BeanPropertyRowMapper<>(ReportInsansiDataResponseDto.class));
     }
 
     public int countAll(Map<String, String> searching, List<String> intColumn, List<String> validColumns) {

@@ -2,8 +2,9 @@ package com.va.corporate.srv.service;
 
 
 import com.va.corporate.srv.dto.PaginatedResponseDto;
-import com.va.corporate.srv.domain.ReportInstansiDomain;
-import com.va.corporate.srv.dto.ReportInsansiResponseDto;
+import com.va.corporate.srv.dto.PaginatedResponseReportDto;
+import com.va.corporate.srv.dto.PaginatedSummaryDto;
+import com.va.corporate.srv.dto.ReportInsansiDataResponseDto;
 import com.va.corporate.srv.repository.ReportInstansiRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,11 +26,12 @@ public class ReportInstansiService {
         this.repository = repository;
     }
 
-    public PaginatedResponseDto<ReportInsansiResponseDto> getPaginationReportInstansi(int page, int size, Map<String, String> searching) {
+    public PaginatedResponseReportDto<ReportInsansiDataResponseDto> getPaginationReportInstansi(int page, int size, Map<String, String> searching) {
 
         System.out.println("Searching value : "+searching);
 
-        List<ReportInsansiResponseDto> reportInstansi = null;
+        List<ReportInsansiDataResponseDto> reportInstansi = null;
+        PaginatedSummaryDto summary = new PaginatedSummaryDto();
 
         int totalItems = 0;
         int totalPages = 0;
@@ -56,6 +58,6 @@ public class ReportInstansiService {
             System.out.println("Error : "+e.getLocalizedMessage());
         }
 
-        return new PaginatedResponseDto<>(reportInstansi, page, totalPages, totalItems);
+        return new PaginatedResponseReportDto<>(reportInstansi, page, totalPages, totalItems, size, summary);
     }
 }

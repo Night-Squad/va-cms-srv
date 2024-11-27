@@ -1,6 +1,7 @@
 package com.va.corporate.srv.service;
 
 import com.va.corporate.srv.dto.PaginatedResponseDto;
+import com.va.corporate.srv.dto.PaginatedSummaryDto;
 import com.va.corporate.srv.models.vav2.MasterCorporateModel;
 import com.va.corporate.srv.repository.vav2.MasterCorporateRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,7 +53,7 @@ public class MasterCorporateService {
             System.out.println("Error : "+e.getLocalizedMessage());
         }
 
-        return new PaginatedResponseDto<>(masterCorporates, page, totalPages, totalItems);
+        return new PaginatedResponseDto<>(masterCorporates, page, totalPages, totalItems, size);
     }
 
     public void addMasterCorporation(@Valid MasterCorporateModel masterCorporateModel) {
