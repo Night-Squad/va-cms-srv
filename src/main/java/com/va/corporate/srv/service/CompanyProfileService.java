@@ -7,10 +7,14 @@ import com.va.corporate.srv.repository.vacms.CompanyProfileRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -82,6 +86,19 @@ public class CompanyProfileService {
         } catch (Exception e) {
             System.out.println("Error : "+e.getLocalizedMessage());
             throw e;
+        }
+    }
+
+    public void uploadLogo(MultipartFile file, String id) throws IOException {
+        try {
+            CompanyProfileModel companyProfileModel = this.repository.findById(Integer.valueOf(id));
+            companyProfileModel.setCompanyLogo(file.getBytes());
+            this.updateCompanyProfile(companyProfileModel);
+        } catch (IOException e) {
+            System.out.println("Error : "+e.getLocalizedMessage());
+            throw e;
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
     }
 }
