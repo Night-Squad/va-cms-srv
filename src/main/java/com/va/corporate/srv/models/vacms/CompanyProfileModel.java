@@ -26,12 +26,11 @@ public class CompanyProfileModel {
     @Column(name = "third_color_pallete")
     private String thirdColorPallete;
 
-//    @NotBlank(message = "company_logo is required")
     @Column(name = "company_logo")
     private byte[] companyLogo;
 
     @Column(name = "company_fav_icon")
-    private String companyFavIcon;
+    private byte[] companyFavIcon;
 
     @Column(name = "info_color")
     private String infoColor;
@@ -120,11 +119,11 @@ public class CompanyProfileModel {
         this.companyLogo = companyLogo;
     }
 
-    public String getCompanyFavIcon() {
+    public byte[] getCompanyFavIcon() {
         return companyFavIcon;
     }
 
-    public void setCompanyFavIcon(String companyFavIcon) {
+    public void setCompanyFavIcon(byte[] companyFavIcon) {
         this.companyFavIcon = companyFavIcon;
     }
 
