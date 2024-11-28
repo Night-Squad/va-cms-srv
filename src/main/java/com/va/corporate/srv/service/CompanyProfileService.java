@@ -72,6 +72,9 @@ public class CompanyProfileService {
             companyProfile.setUpdatedAt(LocalDateTime.now());
             companyProfile.setUpdatedBy("system");
             this.repository.updateCompanyProfile(companyProfile);
+            if(companyProfile.getIsActive()) {
+                this.repository.setInactive(companyProfile.getId().intValue(), companyProfile.getCompanyId());
+            }
         } catch (Exception e) {
             System.out.println("Error : "+e.getLocalizedMessage());
             throw e;
