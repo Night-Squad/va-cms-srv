@@ -102,4 +102,17 @@ public class CompanyProfileService {
             throw new RuntimeException(e);
         }
     }
+
+    public void uploadFavIcon(MultipartFile file, String id) throws IOException {
+        try {
+            CompanyProfileModel companyProfileModel = this.repository.findById(Integer.valueOf(id));
+            companyProfileModel.setCompanyFavIcon(file.getBytes());
+            this.updateCompanyProfile(companyProfileModel);
+        } catch (IOException e) {
+            System.out.println("Error : "+e.getLocalizedMessage());
+            throw e;
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
 }

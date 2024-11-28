@@ -141,4 +141,23 @@ public class CompanyProfileController {
             return new ResponseMessage().success("99", "error", 500, "Failed to upload image.", null);
         }
     }
+
+    @Operation(summary = "Upload company fav icon")
+    @ApiResponse(responseCode = "201")
+    @ApiResponse(responseCode = "401", content = @Content(schema = @Schema(implementation = ApiErrorResponseDto.class)))
+    @ApiResponse(responseCode = "409", content = @Content(schema = @Schema(implementation = ApiErrorResponseDto.class)))
+    @ApiResponse(responseCode = "500", content = @Content(schema = @Schema(implementation = ApiErrorResponseDto.class)))
+    @PostMapping("/upload-fav-icon")
+    public Map<String, Object> uploadFavIcon(@RequestParam("file") MultipartFile file, @RequestParam("id") String id) {
+        try {
+            System.out.println("Company Profile : upload fav-icon");
+            System.out.println("Request: "+file.getOriginalFilename()+" id : "+id);
+            System.out.println("Timestamp : " + LocalDateTime.now());
+            companyProfileService.uploadFavIcon(file, id);
+            return new ResponseMessage().success("00", "success", 200, "Success uploaded.", null);
+        } catch (Exception e) {
+            System.out.println("Exception e : "+e.getMessage());
+            return new ResponseMessage().success("99", "error", 500, "Failed to upload image.", null);
+        }
+    }
 }
