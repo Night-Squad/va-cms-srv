@@ -118,4 +118,13 @@ public class CompanyProfileService {
             throw new RuntimeException(e);
         }
     }
+
+    public CompanyProfileModel getLoginCustomization(int companyId) {
+        try {
+            return this.repository.getLoginCustomization(companyId);
+        } catch (Exception e) {
+            System.out.println("Error : "+e.getLocalizedMessage());
+            throw e;
+        }
+    }
 }

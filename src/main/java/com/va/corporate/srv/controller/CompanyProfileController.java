@@ -160,4 +160,30 @@ public class CompanyProfileController {
             return new ResponseMessage().success("99", "error", 500, "Failed to upload image.", null);
         }
     }
+
+    @Operation(summary = "Customize login")
+    @ApiResponse(responseCode = "201")
+    @ApiResponse(responseCode = "401", content = @Content(schema = @Schema(implementation = ApiErrorResponseDto.class)))
+    @ApiResponse(responseCode = "409", content = @Content(schema = @Schema(implementation = ApiErrorResponseDto.class)))
+    @ApiResponse(responseCode = "500", content = @Content(schema = @Schema(implementation = ApiErrorResponseDto.class)))
+    @GetMapping("/customize-login")
+    public Map<String, Object> getLoginCustomization(@RequestParam int companyId) {
+        try {
+            System.out.println("Company Profile : get login customization");
+            System.out.println("Request: company_id = " + companyId);
+            System.out.println("Timestamp : " + LocalDateTime.now());
+
+            CompanyProfileModel companyProfileModel = companyProfileService.getLoginCustomization(companyId);
+
+            return new ResponseMessage().success("00", "success", 200, "Success fetch data.", companyProfileModel);
+        } catch (Exception e) {
+            String message = "";
+            if(e.getLocalizedMessage().contains("Incorrect result size")) {
+                message = "Preset tidak ditemukan.";
+            } else {
+                message = e.getLocalizedMessage();
+            }
+            return new ResponseMessage().success("99", "error", 500, message, null);
+        }
+    }
 }

@@ -19,6 +19,7 @@ public class CompanyProfileRepository {
     private static final String FIND_BY_COMPANY_ID = "SELECT * FROM company_profile WHERE company_id = ? and is_active = true ORDER BY id DESC LIMIT 1";
     private static final String FIND_BY_ID = "SELECT * FROM company_profile WHERE id = ?";
     private static final String SET_INACTIVE_RECORD_ON_UPDATE = "UPDATE company_profile SET is_active = false WHERE id <> ? and company_id = ?";
+    private static final String GET_COMPANY_CUSTOMIZATION = "select cp.main_color_pallete, cp.second_color_pallete, cp.third_color_pallete, cp.info_color, cp.error_color, cp.company_logo, cp.company_fav_icon from company_profile cp where cp.company_id = ? and cp.is_active = true order by id desc limit 1";
     private final JdbcTemplate jdbcTemplate;
 
     public CompanyProfileRepository(@Qualifier("vacmsJdbcTemplate") JdbcTemplate vacmsJdbcTemplate) {
@@ -133,6 +134,12 @@ public class CompanyProfileRepository {
 
     public void setInactive(Integer id, Integer companyId) {
         jdbcTemplate.update(SET_INACTIVE_RECORD_ON_UPDATE, new Object[]{id, companyId});
+    }
+
+    public CompanyProfileModel getLoginCustomization(Integer companyId) {
+        return jdbcTemplate.queryForObject(GET_COMPANY_CUSTOMIZATION,
+                new BeanPropertyRowMapper<>(CompanyProfileModel.class),
+                companyId);
     }
 
     public int countAll(Map<String, String> searching) {
