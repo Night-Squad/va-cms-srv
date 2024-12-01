@@ -10,3 +10,5 @@ cara penggunaan
 
 cara penggunaan endpoint
 1.Tinggal ditambahkan saja query params pada url, misal ingin searching id, contoh : /api/v2.4/korporat/find-all?page=1&size=10&id=1 atau ingin searching corporate_name, contoh : /api/v2.4/korporat/find-all?page=1&size=10&corporate_name=Askrida
+
+
