@@ -9,6 +9,7 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 public class VACmsSrvApplication {
 
 	// CMS = Corporate Management System
+
 	public static void main(String[] args) {
 
 		System.out.println("testing pipeline...");
