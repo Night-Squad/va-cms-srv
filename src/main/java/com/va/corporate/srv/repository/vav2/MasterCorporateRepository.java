@@ -51,8 +51,14 @@ public class MasterCorporateRepository {
 
         System.out.println("sql : "+sql.toString());
 
-        return jdbcTemplate.query(sql.toString(), params.toArray(),
-                new BeanPropertyRowMapper<>(MasterCorporateModel.class));
+        try {
+            return jdbcTemplate.query(sql.toString(), params.toArray(),
+                    new BeanPropertyRowMapper<>(MasterCorporateModel.class));
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw e; // Rethrow for debugging
+        }
+
     }
 
 
@@ -78,50 +84,70 @@ public class MasterCorporateRepository {
     }
 
     public void addMasterCorporation(MasterCorporateModel masterCorporation) {
-        Map<String, Object> columnValues = new HashMap<>();
 
-        // Use reflection to get fields and their values dynamically
-        for (Field field : MasterCorporateModel.class.getDeclaredFields()) {
-            field.setAccessible(true);
-            try {
-                Object value = field.get(masterCorporation);
-                // System.out.println("Field: " + field.getName() + ", Value: " + value); // Debug log
-                if (value != null) {
-                    columnValues.put(field.getName(), value);
+        try {
+            Map<String, Object> columnValues = new HashMap<>();
+
+            // Use reflection to get fields and their values dynamically
+            for (Field field : MasterCorporateModel.class.getDeclaredFields()) {
+                field.setAccessible(true);
+                try {
+                    Object value = field.get(masterCorporation);
+                    // System.out.println("Field: " + field.getName() + ", Value: " + value); // Debug log
+                    if (value != null) {
+                        columnValues.put(field.getName(), value);
+                    }
+                } catch (IllegalAccessException e) {
+                    throw new RuntimeException("Failed to access field value", e);
                 }
-            } catch (IllegalAccessException e) {
-                throw new RuntimeException("Failed to access field value", e);
             }
+
+            if (columnValues.isEmpty()) {
+                throw new IllegalArgumentException("No fields to insert");
+            }
+
+            // Dynamically build the SQL query
+            StringJoiner columns = new StringJoiner(", ");
+            StringJoiner placeholders = new StringJoiner(", ");
+            columnValues.forEach((key, value) -> {
+                columns.add(NamingUtils.camelToSnake(key));
+                placeholders.add("?");
+            });
+
+            String sql = String.format("INSERT INTO public.master_corporation (%s) VALUES (%s)", columns, placeholders);
+
+            // Execute the SQL statement with the collected values
+            jdbcTemplate.update(sql, columnValues.values().toArray());
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw e; // Rethrow for debugging
         }
 
-        if (columnValues.isEmpty()) {
-            throw new IllegalArgumentException("No fields to insert");
-        }
-
-        // Dynamically build the SQL query
-        StringJoiner columns = new StringJoiner(", ");
-        StringJoiner placeholders = new StringJoiner(", ");
-        columnValues.forEach((key, value) -> {
-            columns.add(NamingUtils.camelToSnake(key));
-            placeholders.add("?");
-        });
-
-        String sql = String.format("INSERT INTO public.master_corporation (%s) VALUES (%s)", columns, placeholders);
-
-        // Execute the SQL statement with the collected values
-        jdbcTemplate.update(sql, columnValues.values().toArray());
     }
 
     public void updateMasterCorporation(MasterCorporateModel masterCorporation){
-        jdbcTemplate.update(UPDATE,
-                masterCorporation.getCorporateName(),
-                masterCorporation.getIsActive(),
-                masterCorporation.getUpdatedAt(),
-                masterCorporation.getUpdatedBy(),
-                masterCorporation.getId());
+        try {
+            jdbcTemplate.update(UPDATE,
+                    masterCorporation.getCorporateName(),
+                    masterCorporation.getIsActive(),
+                    masterCorporation.getUpdatedAt(),
+                    masterCorporation.getUpdatedBy(),
+                    masterCorporation.getId());
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw e; // Rethrow for debugging
+        }
+
     }
 
     public void deleteMasterCorporation(Long id){
-        jdbcTemplate.update(UPDATE_IS_ACTIVE, id);
+        try {
+            jdbcTemplate.update(UPDATE_IS_ACTIVE, id);
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw e; // Rethrow for debugging
+        }
+
     }
 }
