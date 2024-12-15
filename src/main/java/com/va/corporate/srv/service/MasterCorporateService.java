@@ -45,7 +45,7 @@ public class MasterCorporateService {
             List<String> validColumns = Arrays.asList("corporate_name", "created_by", "updated_by", "id", "start_date", "end_date");
 
             // count all
-            System.out.println("count all...");
+            System.out.println("count all....");
             totalItems = repository.countAll(searching, intColumn, validColumns);
             totalPages = (int) Math.ceil((double) totalItems / size);
 
