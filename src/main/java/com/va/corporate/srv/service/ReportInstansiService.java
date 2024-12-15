@@ -10,10 +10,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
+
+import static java.lang.Integer.parseInt;
+import static java.lang.Integer.sum;
 
 @Service
 @Validated
@@ -53,11 +53,37 @@ public class ReportInstansiService {
             totalItems = repository.countAll(searching, intColumn, validColumns);
             totalPages = (int) Math.ceil((double) totalItems / size);
 
+            // summary
+            summary = this.summaryReportInstansi(reportInstansi);
+
 
         } catch (Exception e) {
             System.out.println("Error : "+e.getLocalizedMessage());
         }
 
         return new PaginatedResponseReportDto<>(reportInstansi, page, totalPages, totalItems, size, summary);
+    }
+
+    private PaginatedSummaryDto summaryReportInstansi(List<ReportInsansiDataResponseDto> allData) {
+        PaginatedSummaryDto summary = new PaginatedSummaryDto();
+
+        try {
+
+            // debuging summary
+            System.out.println("==== SUMARY===");
+            System.out.println(allData);
+
+            for(int i=0;i<allData.size();i++) {
+                System.out.println("get data each : "+allData.get(i));
+                System.out.println("get data each component : "+allData.get(i).getDebit());
+                System.out.println("summary get debit : "+summary.getDebit());
+//                int totalDebit = summary.getDebit()+parseInt(allData.get(i).);
+//                summary.setDebit(parseInt(String.valueOf(totalDebit)));
+            }
+            return summary;
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw e;
+        }
     }
 }
