@@ -61,9 +61,20 @@ public class MasterCorporateRepository {
         StringBuilder sql = new StringBuilder(COUNTALL);
         List<Object> params = generalHandlerQuery.buildSearchParams(searching, sql, intColumn, validColumns);
 
+        // Log for debugging
+        System.out.println("Generated SQL: " + sql);
+        System.out.println("Parameters: " + params);
+
         System.out.println("count all sql.. : "+sql.toString());
 
-        return jdbcTemplate.queryForObject(sql.toString(), params.toArray(), Integer.class);
+        try {
+            return jdbcTemplate.queryForObject(sql.toString(), params.toArray(), Integer.class);
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw e; // Rethrow for debugging
+        }
+
+
     }
 
     public void addMasterCorporation(MasterCorporateModel masterCorporation) {
