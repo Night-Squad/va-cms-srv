@@ -73,12 +73,17 @@ public class ReportInstansiService {
             System.out.println("==== SUMARY===");
             System.out.println(allData);
 
+            int totalDebit = 0;
+            int totalCredit = 0;
+
             for(int i=0;i<allData.size();i++) {
-                System.out.println("get data each : "+allData.get(i));
-                System.out.println("get data each component : "+allData.get(i).getDebit());
-                System.out.println("summary get debit : "+summary.getDebit());
-//                int totalDebit = summary.getDebit()+parseInt(allData.get(i).);
-//                summary.setDebit(parseInt(String.valueOf(totalDebit)));
+                totalDebit = Integer.parseInt(summary.getDebit() + allData.get(i).getDebit());
+                totalCredit = Integer.parseInt(summary.getKredit() + allData.get(i).getCredit());
+
+                System.out.println("==== total debit : "+totalDebit);
+                System.out.println("==== total credit : "+totalCredit);
+                summary.setDebit(totalDebit);
+                summary.setKredit(totalCredit);
             }
             return summary;
         } catch (Exception e) {
