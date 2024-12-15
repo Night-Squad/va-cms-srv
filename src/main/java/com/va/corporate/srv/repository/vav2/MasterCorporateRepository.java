@@ -20,11 +20,11 @@ import java.util.StringJoiner;
 @Repository
 public class MasterCorporateRepository {
 
-    private static final String FINDALL = "SELECT * FROM public.master_corporation WHERE 1=1";
+    private static final String FINDALL = "SELECT * FROM master_corporation WHERE 1=1";
 
-    private static final String COUNTALL = "SELECT COUNT(*) FROM public.master_corporation WHERE 1=1";
-    private static final String UPDATE = "UPDATE public.master_corporation SET corporate_name = ?, is_active = ?, updated_at = ?, updated_by = ? WHERE id = ?";
-    private static final String UPDATE_IS_ACTIVE = "UPDATE public.master_corporation SET is_active = false WHERE id = ?";
+    private static final String COUNTALL = "SELECT COUNT(*) FROM master_corporation WHERE 1=1";
+    private static final String UPDATE = "UPDATE master_corporation SET corporate_name = ?, is_active = ?, updated_at = ?, updated_by = ? WHERE id = ?";
+    private static final String UPDATE_IS_ACTIVE = "UPDATE master_corporation SET is_active = false WHERE id = ?";
 
     @Autowired
     private GeneralHandlerQuery generalHandlerQuery;
@@ -61,7 +61,7 @@ public class MasterCorporateRepository {
         StringBuilder sql = new StringBuilder(COUNTALL);
         List<Object> params = generalHandlerQuery.buildSearchParams(searching, sql, intColumn, validColumns);
 
-        System.out.println("count all sql : "+sql.toString());
+        System.out.println("count all sql.. : "+sql.toString());
 
         return jdbcTemplate.queryForObject(sql.toString(), params.toArray(), Integer.class);
     }
