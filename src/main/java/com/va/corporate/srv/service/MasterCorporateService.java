@@ -44,9 +44,13 @@ public class MasterCorporateService {
             // specify valid columns
             List<String> validColumns = Arrays.asList("corporate_name", "created_by", "updated_by", "id", "start_date", "end_date");
 
+            // count all
+            System.out.println("count all...");
             totalItems = repository.countAll(searching, intColumn, validColumns);
             totalPages = (int) Math.ceil((double) totalItems / size);
 
+            // data all
+            System.out.println("data all..");
             masterCorporates = repository.findAllQueryDynamic(page, size, searching, intColumn, validColumns);
 
         } catch (Exception e) {
