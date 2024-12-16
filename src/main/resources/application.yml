@@ -39,7 +39,7 @@ spring:
       hikari.maxLifetime: 1800000
 
   liquibase:
-    enabled: true
+    enabled: false
     change-log: classpath:db/changelog-master.xml
 
 #springdoc:
